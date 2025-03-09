@@ -1,0 +1,4 @@
+
+# Ignore the build and vs directories
+/out
+/.vs
