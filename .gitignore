@@ -1,4 +1,5 @@
 
 # Ignore the build and vs directories
 /out
+/build
 /.vs
