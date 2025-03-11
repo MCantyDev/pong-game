@@ -43,6 +43,8 @@ file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../project/src/*.cpp")
 file(COPY ${ASSETS_DIR}/ DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 message(STATUS "Copying Required Assets from ${ASSETS_DIR} to ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
+add_compile_definitions(SFML_STATIC)
+
 # Create the Executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
