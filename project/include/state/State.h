@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include "StateManager.h"
+
 /*
 * @class State
 * @brief Abstract Class State - Parent of all States within Application
@@ -10,11 +12,17 @@
 class State
 {
 public:
-	State();
-	~State();
+	State(StateManager* manager) 
+		: stateManager(manager) {};
 
-private:
+	virtual ~State() = default;
 
+	virtual void handleInput() = 0;
+	virtual void update() = 0;
+	virtual void render() = 0;
+
+protected:
+	StateManager* stateManager;
 };
 
 #endif // STATE_H
