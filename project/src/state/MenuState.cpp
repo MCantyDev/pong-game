@@ -4,7 +4,7 @@
 #include "state/PlayingState.h"
 
 MenuState::MenuState(StateManager* manager)
-	: State(manager), window(manager->getWindow())
+	: State(manager), window(*RenderWindowManager::GetWindow())
 {
 	arial.openFromFile("fonts/Arial.ttf");
 

@@ -23,12 +23,12 @@ void DeltaTimeClock::DeleteInstance()
 	}
 }
 
+float DeltaTimeClock::GetDeltaTime()
+{
+	return deltaTime;
+}
+
 void DeltaTimeClock::update()
 {
 	deltaTime = deltaClock.restart().asSeconds();
-}
-
-float DeltaTimeClock::getDeltaTime()
-{
-	return deltaTime;
 }

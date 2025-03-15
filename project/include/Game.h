@@ -4,6 +4,8 @@
 // Management Systems
 #include "StateManager.h"
 #include "DeltaTimeClock.h"
+#include "RenderWindowManager.h"
+#include "SoundManager.h"
 
 // SMFL Includes
 #include "SFML/Window.hpp"
@@ -35,7 +37,8 @@ public:
 private:
 	// Member Functions
 	// Initialisation
-	void initialiseMusic();								// Loads Sounds from Files
+	void initialiseSounds();										// Loads Sounds from Files
+	void initialiseBackgroundMusic();								// Loads Sounds from Files
 
 	// Member Variables
 
@@ -43,16 +46,16 @@ private:
 	const char* title = "Pong";
 	const float WIDTH = 1200.f;
 	const float HEIGHT = 800.f;
-	sf::RenderWindow window;
+	sf::RenderWindow& window;
 
 	// States
 	StateManager stateManager;
 	
 	// DeltaTime
 	DeltaTimeClock* deltaClock = nullptr;
-	
-	// Music
-	sf::Music backgroundMusic;
+
+	// Sounds
+	SoundManager* soundManager = nullptr;
 };
 
 #endif // GAME_H

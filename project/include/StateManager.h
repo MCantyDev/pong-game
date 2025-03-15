@@ -24,7 +24,7 @@ class State; // Forward Declare State to stop Circular dependency
 class StateManager
 {
 public:
-	StateManager(sf::RenderWindow& window);
+	StateManager();
 	~StateManager();
 
 	// State Specific Functions - Each State will handle Input, Update and Render differently
@@ -33,10 +33,8 @@ public:
 	void render();
 
 	void changeState(State* newState);
-	sf::RenderWindow& getWindow();
 
 private:
-	sf::RenderWindow& window;
 	State* state;
 
 	sf::Clock swapClock;

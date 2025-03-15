@@ -2,13 +2,14 @@
 
 Game::Game()
 	: 
-	window(sf::VideoMode({ (unsigned int)WIDTH, (unsigned int)HEIGHT }), title, { sf::Style::Titlebar | sf::Style::Close }),
-	stateManager(StateManager(window)), deltaClock(DeltaTimeClock::GetInstance())
+	window(*RenderWindowManager::GetWindow()), 
+	deltaClock(DeltaTimeClock::GetInstance()), soundManager(SoundManager::GetInstance())
 {
 	window.setVerticalSyncEnabled(true);
 
-	initialiseMusic();
-	backgroundMusic.play();
+	initialiseSounds();
+	initialiseBackgroundMusic();
+	soundManager->GetMusic("background")->play();
 }
 
 void Game::run()
@@ -36,11 +37,22 @@ void Game::run()
 	}
 }
 
-void Game::initialiseMusic()
+void Game::initialiseSounds()
 {
-	if (backgroundMusic.openFromFile("sounds/background_music.mp3"))
+	soundManager->addSound("paddle_bounce", "sounds/paddle_bounce.wav");
+	soundManager->addSound("wall_bounce", "sounds/wall_bounce.wav");
+	soundManager->addSound("score_point", "sounds/score_point.wav");
+}
 
-	// Music Setting
-	backgroundMusic.setVolume(15);
-	backgroundMusic.setLooping(true);
+void Game::initialiseBackgroundMusic()
+{
+	soundManager->addMusic("background", "sounds/background_music.mp3");
+
+	auto backgroundMusic = soundManager->GetMusic("background");
+
+	if (backgroundMusic)
+	{
+		backgroundMusic->setVolume(15);
+		backgroundMusic->setLooping(true);
+	}
 }

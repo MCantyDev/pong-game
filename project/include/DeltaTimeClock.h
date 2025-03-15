@@ -10,8 +10,9 @@ public:
 	static DeltaTimeClock* GetInstance();
 	static void DeleteInstance();
 
+	static float GetDeltaTime();
+
 	void update();
-	static float getDeltaTime();
 
 private:
 	DeltaTimeClock();

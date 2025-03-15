@@ -5,8 +5,8 @@
 #include "state/MenuState.h"
 #include "state/PlayingState.h"
 
-StateManager::StateManager(sf::RenderWindow& window)
-	: window(window), state(new MenuState(this))
+StateManager::StateManager()
+	: state(new MenuState(this))
 {
 	std::cout << "Setup: State Manager Initialised" << std::endl;
 }
@@ -37,11 +37,6 @@ void StateManager::changeState(State* newState)
 	{
 		canAction = true;
 	}
-}
-
-sf::RenderWindow& StateManager::getWindow()
-{
-	return window;
 }
 
 void StateManager::handleInput()

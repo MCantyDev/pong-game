@@ -3,6 +3,12 @@
 
 #include "state/State.h"
 #include "DeltaTimeClock.h"
+#include "RenderWindowManager.h"
+
+// Drawable Include
+#include "drawables/Paddle.h"
+#include "drawables/AIPaddle.h"
+#include "drawables/Ball.h"
 
 // SMFML Include
 #include "SFML/Graphics.hpp"
@@ -13,6 +19,7 @@
 // Standard Library Include
 #include <random>
 #include <cmath>
+#include <memory>
 
 /*
 * @class PlayingState
@@ -24,64 +31,24 @@ class PlayingState : public State
 {
 public:
 	PlayingState(StateManager* manager);
-	~PlayingState() = default;
+	~PlayingState();
 
 	virtual void handleInput() override;
 	virtual void update() override;
 	virtual void render() override;
 private:
 	// Private Functions
-	void initialisePaddles();								// Sets up the Left and Right Paddles
-	void initialiseBall();									// Sets up the Ball
-	void initialiseSounds();								// Loads Sounds from Files
-
-	void moveAI();
-	void checkScored();
-	void checkPaddleCollisions();
-	void checkWallCollisions();
-
-	sf::RenderWindow& window;
-	float width;
-	float height;
-
-	float deltaTime = 0.f;
-	sf::Clock delayClock;									// For Move Delay of Ball from Game Start and Scoring
-
-	// Computer Values
-	sf::Clock computerClock;								// For Computer (AI) movement delay -> Turns out it is possible to win but EXTREMELY DIFFICULT
-	float computerPaddleSpeed = 0.f;						// Speed Computer Paddle moves in the Y-Axis
-	sf::Time computerTime = sf::milliseconds(1);			// Delay between Computer changing move direction
+	void initialiseSounds();		// Loads Sounds from Files
 
 	// Paddle Values
-	sf::RectangleShape leftPaddle;
-	sf::RectangleShape rightPaddle;
-	const sf::Vector2f paddleSize = sf::Vector2f(40, 120);	// Paddle Size
-	const float paddleSpeed = 500.f;						// Speed Paddle moves in the Y-Axis
+	Paddle* playerOne = nullptr;
+	Paddle* playerTwo = nullptr;
+
+	// AI Paddle Values
+	AiPaddle* aiPaddle = nullptr;
 
 	// Ball Values
-	sf::CircleShape ball;
-	const float ballRadius = 15.f;							// Raidus of the Ball
-	const float ballSpeed = 600.f;							// Speed of Ball (Faster than Paddle)
-	sf::Angle ballAngle = sf::degrees(-180);				// Ball goes towards Player
-	bool moveBall = false;									// Make it so we can define when the Ball should BEGIN moving
-
-	// Random Number Generator
-	std::random_device rando;
-	std::mt19937 rng;
-
-	// Sound Buffers
-	sf::SoundBuffer paddleBounceBuffer;
-	sf::SoundBuffer wallBounceBuffer;
-	sf::SoundBuffer scorePointBuffer;
-
-	// Sounds
-	sf::Sound paddleBounce = sf::Sound(paddleBounceBuffer);
-	sf::Sound wallBounce = sf::Sound(wallBounceBuffer);
-	sf::Sound scorePoint = sf::Sound(scorePointBuffer);
-
-	// Score Values
-	int leftScore = 0;
-	int rightScore = 0;
+	Ball* ball = nullptr;
 };
 
 #endif // PLAYINGSTATE_H
