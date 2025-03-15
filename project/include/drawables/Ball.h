@@ -1,14 +1,12 @@
 #ifndef BALL_H
 #define BALL_H
 
-// Singletons
-#include "RenderWindowManager.h"
-#include "DeltaTimeClock.h"
-#include "SoundManager.h"
-#include "ScoreManager.h"
-
 // Drawables
 #include "drawables/Drawable.h"
+
+// Singletons
+#include "core/SoundManager.h"
+#include "core/ScoreManager.h"
 
 // Observable
 #include "Observer/Observable.h"

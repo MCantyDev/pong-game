@@ -1,6 +1,5 @@
 #include "drawables/AIPaddle.h"
 
-#include <iostream>
 AiPaddle::AiPaddle(PaddleSide side)
 	: Paddle(side)
 {

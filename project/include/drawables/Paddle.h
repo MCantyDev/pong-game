@@ -4,10 +4,7 @@
 // SFML Include
 #include "SFML/Graphics.hpp"
 
-// Custom Include
-#include "DeltaTimeClock.h"
-#include "RenderWindowManager.h"
-
+// Drawable Include
 #include "drawables/Drawable.h"
 
 enum class PaddleSide

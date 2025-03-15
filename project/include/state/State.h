@@ -1,7 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "StateManager.h"
+#include "core/StateManager.h"
 
 /*
 * @class State

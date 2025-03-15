@@ -4,8 +4,9 @@
 // SFML Include
 #include "SFML/Graphics.hpp"
 
-// Custom Include
-#include "RenderWindowManager.h"
+// Core Include
+#include "core/RenderWindowManager.h"
+#include "core/DeltaTimeClock.h"
 
 class Drawable
 {

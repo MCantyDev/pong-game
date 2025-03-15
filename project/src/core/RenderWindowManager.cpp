@@ -1,4 +1,4 @@
-#include "RenderWindowManager.h"
+#include "core/RenderWindowManager.h"
 
 sf::RenderWindow* RenderWindowManager::instance = nullptr;
 

@@ -20,6 +20,7 @@ public:
 	bool checkGameEnd();
 	static void ResetScores();
 	static void ResetTotalWins();
+	static int GetScore(PaddleSide side);
 
 private:
 	ScoreManager() = default;

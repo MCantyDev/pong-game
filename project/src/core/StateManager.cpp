@@ -1,8 +1,8 @@
-#include "StateManager.h"
+#include "core/StateManager.h"
 
 // Different State Types 
 #include "state/State.h"
-#include "state/MenuState.h"
+#include "state/MainMenuState.h"
 #include "state/PlayingState.h"
 
 // Definition of InputManager
@@ -17,7 +17,7 @@ float StateManager::debounceTime = 1.f;
 
 StateManager::StateManager()
 {
-	state = new MenuState();
+	state = new MainMenuState();
 	InputManager::InitialiseBindingsForState();
 }
 

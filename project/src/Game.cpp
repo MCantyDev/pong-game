@@ -27,7 +27,7 @@ void Game::run()
 			}
 		}
 
-		window.clear(sf::Color(50, 50, 50));
+		window.clear(sf::Color(25, 25, 25));
 		
 		deltaClock->update();
 

@@ -2,9 +2,6 @@
 #define PLAYINGSTATE_H
 
 #include "state/State.h"
-#include "DeltaTimeClock.h"
-#include "RenderWindowManager.h"
-#include "ScoreManager.h"
 
 // Drawable Include
 #include "drawables/Paddle.h"
@@ -48,7 +45,7 @@ public:
 
 private:
 	// Private Functions
-	void initialiseSounds();		// Loads Sounds from Files
+	void initialiseText();
 
 	// Score Manager 
 	ScoreManager* scoreManager = nullptr;
@@ -62,6 +59,11 @@ private:
 
 	// Ball Values
 	Ball* ball = nullptr;
+
+	// Text Scores
+	sf::Font font;
+	sf::Text leftScoreText;
+	sf::Text rightScoreText;
 };
 
 #endif // PLAYINGSTATE_H

@@ -1,7 +1,6 @@
 #include "drawables/Ball.h"
 
 #include "drawables/Paddle.h"
-#include <iostream>
 
 Ball::Ball(Paddle* p1, Paddle* p2)
 	: playerOne(p1), playerTwo(p2),

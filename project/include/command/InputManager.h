@@ -6,6 +6,8 @@
 
 #include "command/Commands.h"
 
+#include "core/RenderWindowManager.h"
+
 // Standard Library Include
 #include <unordered_map>
 
