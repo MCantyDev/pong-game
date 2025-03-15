@@ -17,8 +17,8 @@ public:
 	static sf::Sound* GetSound(std::string soundName);
 	static sf::Music* GetMusic(std::string musicName);
 
-	static void addSound(std::string soundName, std::string filePath);
-	static void addMusic(std::string soundName, std::string filePath);
+	static void AddSound(std::string soundName, std::string filePath);
+	static void AddMusic(std::string soundName, std::string filePath);
 
 private:
 	SoundManager() = default;

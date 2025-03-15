@@ -16,7 +16,7 @@
 class MenuState : public State
 {
 public:
-	MenuState(StateManager* manager);
+	MenuState();
 	~MenuState() = default;
 
 	virtual void handleInput() override;
@@ -25,7 +25,6 @@ public:
 
 private:
 	void initialiseText();
-
 
 	sf::RenderWindow& window;
 

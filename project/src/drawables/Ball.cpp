@@ -5,7 +5,7 @@
 
 Ball::Ball(Paddle* p1, Paddle* p2)
 	: playerOne(p1), playerTwo(p2),
-	rando(), rng(rando())
+	rando(), rng(rando()), scoreManager(ScoreManager::GetInstance())
 {
 	circle.setRadius(ballRadius - 4);
 	circle.setFillColor(sf::Color::White);
@@ -14,6 +14,9 @@ Ball::Ball(Paddle* p1, Paddle* p2)
 	circle.setOrigin({ ballRadius / 2, ballRadius / 2 });
 	circle.setPosition({ RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 });
 	shape = &circle;
+
+	// Add an Observer
+	addObserver(scoreManager);
 
 	// Choose Random Starting Angle
 	double r = ((double)rand() / (RAND_MAX));
@@ -103,7 +106,7 @@ void Ball::scoreCollisionCheck()
 	if (circle.getPosition().x - ballRadius < 0.f)
 	{
 		SoundManager::GetSound("score_point")->play();
-		rightScore++;
+		notifyObservers(PaddleSide::RIGHT);
 
 		delayClock.restart();
 		moveBall = false;
@@ -119,7 +122,7 @@ void Ball::scoreCollisionCheck()
 	if (circle.getPosition().x + ballRadius > RenderWindowManager::GetWidth())
 	{
 		SoundManager::GetSound("score_point")->play();
-		leftScore++;
+		notifyObservers(PaddleSide::LEFT);
 
 		delayClock.restart();
 		moveBall = false;

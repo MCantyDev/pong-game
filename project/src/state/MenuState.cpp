@@ -3,8 +3,8 @@
 // Different States
 #include "state/PlayingState.h"
 
-MenuState::MenuState(StateManager* manager)
-	: State(manager), window(*RenderWindowManager::GetWindow())
+MenuState::MenuState()
+	: window(*RenderWindowManager::GetWindow())
 {
 	arial.openFromFile("fonts/Arial.ttf");
 
@@ -15,7 +15,7 @@ void MenuState::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
 	{
-		stateManager->changeState(new PlayingState(stateManager));
+		StateManager::ChangeState(new PlayingState());
 	}
 }
 

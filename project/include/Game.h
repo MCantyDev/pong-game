@@ -6,6 +6,7 @@
 #include "DeltaTimeClock.h"
 #include "RenderWindowManager.h"
 #include "SoundManager.h"
+#include "ScoreManager.h"
 
 // SMFL Includes
 #include "SFML/Window.hpp"
@@ -49,13 +50,16 @@ private:
 	sf::RenderWindow& window;
 
 	// States
-	StateManager stateManager;
+	StateManager* stateManager = nullptr;
 	
 	// DeltaTime
 	DeltaTimeClock* deltaClock = nullptr;
 
 	// Sounds
 	SoundManager* soundManager = nullptr;
+
+	// Score Manager
+	ScoreManager* scoreManager = nullptr;
 };
 
 #endif // GAME_H

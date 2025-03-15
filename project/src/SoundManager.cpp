@@ -50,7 +50,7 @@ sf::Sound* SoundManager::GetSound(std::string soundName)
 
 	throw std::runtime_error("Sound not found: " + soundName);
 }
-void SoundManager::addSound(std::string soundName, std::string filePath)
+void SoundManager::AddSound(std::string soundName, std::string filePath)
 {
 	sf::SoundBuffer buffer;
 	if (!buffer.loadFromFile(filePath))
@@ -71,7 +71,7 @@ sf::Music* SoundManager::GetMusic(std::string musicName)
 
 	throw std::runtime_error("Music not found: " + musicName);
 }
-void SoundManager::addMusic(std::string musicName, std::string filePath)
+void SoundManager::AddMusic(std::string musicName, std::string filePath)
 {
 	sf::Music* music = new sf::Music();
 

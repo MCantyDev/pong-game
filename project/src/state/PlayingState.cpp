@@ -3,11 +3,14 @@
 // Different State Types
 #include "state/MenuState.h"
 
-PlayingState::PlayingState(StateManager* manager)
-	: State(manager),
+PlayingState::PlayingState()
+	:
+	scoreManager(ScoreManager::GetInstance()),
 	playerOne(new Paddle(PaddleSide::LEFT)), playerTwo(new AiPaddle(PaddleSide::RIGHT)),
 	ball(new Ball(playerOne, playerTwo))
 {
+	ScoreManager::ResetScores();
+
 	playerOne->setColour(sf::Color(200, 50, 50));
 
 	playerTwo->setColour(sf::Color(50, 50, 200));
@@ -32,7 +35,7 @@ void PlayingState::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 	{
-		stateManager->changeState(new MenuState(stateManager));
+		StateManager::ChangeState(new MenuState());
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
 	{
@@ -50,6 +53,11 @@ void PlayingState::update()
 
 	if (aiPaddle)
 		aiPaddle->update();
+
+	if (scoreManager->checkGameEnd())
+	{
+		StateManager::ChangeState(new MenuState());
+	}
 }
 
 void PlayingState::render()

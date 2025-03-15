@@ -24,22 +24,24 @@ class State; // Forward Declare State to stop Circular dependency
 class StateManager
 {
 public:
-	StateManager();
 	~StateManager();
+	static StateManager* GetInstance();
 
 	// State Specific Functions - Each State will handle Input, Update and Render differently
 	void handleInput();
 	void update();
 	void render();
 
-	void changeState(State* newState);
+	static void ChangeState(State* newState);
 
 private:
-	State* state;
+	StateManager();
+	static StateManager* instance;
+	static State* state;
 
-	sf::Clock swapClock;
-	bool canAction = false;
-	float debounceTime = 1.f;
+	static sf::Clock swapClock;
+	static bool canAction;
+	static float debounceTime;
 };
 
 #endif // STATEMANAGER_H

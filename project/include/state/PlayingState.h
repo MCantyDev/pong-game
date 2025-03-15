@@ -4,6 +4,7 @@
 #include "state/State.h"
 #include "DeltaTimeClock.h"
 #include "RenderWindowManager.h"
+#include "ScoreManager.h"
 
 // Drawable Include
 #include "drawables/Paddle.h"
@@ -30,7 +31,7 @@
 class PlayingState : public State
 {
 public:
-	PlayingState(StateManager* manager);
+	PlayingState();
 	~PlayingState();
 
 	virtual void handleInput() override;
@@ -39,6 +40,9 @@ public:
 private:
 	// Private Functions
 	void initialiseSounds();		// Loads Sounds from Files
+
+	// Score Manager 
+	ScoreManager* scoreManager = nullptr;
 
 	// Paddle Values
 	Paddle* playerOne = nullptr;

@@ -1,15 +1,21 @@
 #ifndef BALL_H
 #define BALL_H
 
-// SFML Include
-#include "SFML/Graphics.hpp"
-#include "SFML/System.hpp"
-
+// Singletons
 #include "RenderWindowManager.h"
 #include "DeltaTimeClock.h"
 #include "SoundManager.h"
+#include "ScoreManager.h"
 
+// Drawables
 #include "drawables/Drawable.h"
+
+// Observable
+#include "Observer/Observable.h"
+
+// SFML Include
+#include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
 
 // Standard Library Include
 #include <random>
@@ -17,7 +23,7 @@
 
 class Paddle;
 
-class Ball : public Drawable
+class Ball : public Drawable, public Observable<PaddleSide>
 {
 public:
 	Ball(Paddle* p1, Paddle* p2);
@@ -38,6 +44,8 @@ private:
 	void wallCollisionCheck();
 	void scoreCollisionCheck();
 
+	ScoreManager* scoreManager = nullptr;
+
 	sf::CircleShape circle;
 	float ballRadius = 15.f;
 	float ballSpeed = 600.f;
@@ -52,9 +60,6 @@ private:
 	// Random Number Generator
 	std::random_device rando;
 	std::mt19937 rng;
-
-	int leftScore = 0;
-	int rightScore = 0;
 };
 
 #endif // BALL_H

@@ -12,17 +12,13 @@
 class State
 {
 public:
-	State(StateManager* manager) 
-		: stateManager(manager) {};
+	State() = default;
 
 	virtual ~State() = default;
 
 	virtual void handleInput() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
-
-protected:
-	StateManager* stateManager;
 };
 
 #endif // STATE_H
