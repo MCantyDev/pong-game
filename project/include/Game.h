@@ -2,6 +2,7 @@
 #define GAME_H
 
 // Management Systems
+#include "command/InputManager.h"
 #include "StateManager.h"
 #include "DeltaTimeClock.h"
 #include "RenderWindowManager.h"
@@ -51,6 +52,9 @@ private:
 
 	// States
 	StateManager* stateManager = nullptr;
+
+	// Input Manager
+	InputManager* inputManager = nullptr;
 	
 	// DeltaTime
 	DeltaTimeClock* deltaClock = nullptr;

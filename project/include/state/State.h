@@ -16,9 +16,17 @@ public:
 
 	virtual ~State() = default;
 
-	virtual void handleInput() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
+
+	// Commands
+	virtual void PlayerOneMoveUp() = 0;
+	virtual void PlayerOneMoveDown() = 0;
+	virtual void PlayerTwoMoveUp() = 0;
+	virtual void PlayerTwoMoveDown() = 0;
+	virtual void Pause() = 0;
+	virtual void Select() = 0;
+	virtual void Return() = 0;
 };
 
 #endif // STATE_H

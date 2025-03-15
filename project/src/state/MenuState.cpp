@@ -6,17 +6,10 @@
 MenuState::MenuState()
 	: window(*RenderWindowManager::GetWindow())
 {
-	arial.openFromFile("fonts/Arial.ttf");
-
-	initialiseText();
-}
-
-void MenuState::handleInput()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
-	{
-		StateManager::ChangeState(new PlayingState());
-	}
+	if (arial.openFromFile("fonts/Arial.ttf"))
+		initialiseText();
+	else
+		throw std::runtime_error("Failed to Load Font");
 }
 
 void MenuState::update()
@@ -40,4 +33,36 @@ void MenuState::initialiseText()
 
 	instructionText.setOrigin({ it.size.x / 2, it.size.y / 2 });
 	instructionText.setPosition({ (float)window.getSize().x / 2, (float)window.getSize().y / 2 });
+}
+
+// Commands
+void MenuState::PlayerOneMoveUp()
+{
+	return;
+}
+void MenuState::PlayerOneMoveDown()
+{
+	return;
+}
+
+void MenuState::PlayerTwoMoveUp()
+{
+	return;
+}
+void MenuState::PlayerTwoMoveDown()
+{
+	return;
+}
+
+void MenuState::Pause()
+{
+	return;
+}
+void MenuState::Select()
+{
+	return;
+}
+void MenuState::Return()
+{
+	StateManager::ChangeState(new PlayingState());
 }

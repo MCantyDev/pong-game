@@ -5,6 +5,9 @@
 #include "state/MenuState.h"
 #include "state/PlayingState.h"
 
+// Definition of InputManager
+#include "command/InputManager.h"
+
 StateManager* StateManager::instance = nullptr;
 State* StateManager::state = nullptr;
 
@@ -15,6 +18,7 @@ float StateManager::debounceTime = 1.f;
 StateManager::StateManager()
 {
 	state = new MenuState();
+	InputManager::InitialiseBindingsForState();
 }
 
 StateManager::~StateManager()
@@ -42,6 +46,8 @@ void StateManager::ChangeState(State* newState)
 		delete state;
 		state = newState;
 		
+		InputManager::InitialiseBindingsForState();
+
 		swapClock.restart();
 		canAction = false;
 	}
@@ -52,12 +58,9 @@ void StateManager::ChangeState(State* newState)
 	}
 }
 
-void StateManager::handleInput()
+State* StateManager::GetState()
 {
-	if (state)
-	{
-		state->handleInput();
-	}
+	return state;
 }
 
 void StateManager::update()

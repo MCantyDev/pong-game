@@ -2,6 +2,7 @@
 #define STATEMANAGER_H
 
 class State; // Forward Declare State to stop Circular dependency
+class InputManager;
 
 // SMFL Includes
 #include "SFML/Graphics.hpp"
@@ -33,6 +34,7 @@ public:
 	void render();
 
 	static void ChangeState(State* newState);
+	static State* GetState();
 
 private:
 	StateManager();

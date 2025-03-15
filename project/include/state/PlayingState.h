@@ -34,9 +34,18 @@ public:
 	PlayingState();
 	~PlayingState();
 
-	virtual void handleInput() override;
 	virtual void update() override;
 	virtual void render() override;
+
+	// Command Overrides
+	virtual void PlayerOneMoveUp() override;
+	virtual void PlayerOneMoveDown() override;
+	virtual void PlayerTwoMoveUp() override;
+	virtual void PlayerTwoMoveDown() override;
+	virtual void Pause() override;
+	virtual void Select() override;
+	virtual void Return() override;
+
 private:
 	// Private Functions
 	void initialiseSounds();		// Loads Sounds from Files

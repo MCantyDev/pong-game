@@ -3,8 +3,9 @@
 Game::Game()
 	: 
 	window(*RenderWindowManager::GetWindow()), 
-	stateManager(StateManager::GetInstance()), deltaClock(DeltaTimeClock::GetInstance()), 
-	soundManager(SoundManager::GetInstance()), scoreManager(ScoreManager::GetInstance())
+	stateManager(StateManager::GetInstance()), inputManager(InputManager::GetInstance()),
+	deltaClock(DeltaTimeClock::GetInstance()), soundManager(SoundManager::GetInstance()),
+	scoreManager(ScoreManager::GetInstance())
 {
 	window.setVerticalSyncEnabled(true);
 
@@ -30,7 +31,7 @@ void Game::run()
 		
 		deltaClock->update();
 
-		stateManager->handleInput();
+		inputManager->HandleInput();
 		stateManager->update();
 		stateManager->render();
 

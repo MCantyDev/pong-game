@@ -31,22 +31,6 @@ PlayingState::~PlayingState()
 	playerTwo = nullptr;
 }
 
-void PlayingState::handleInput()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-	{
-		StateManager::ChangeState(new MenuState());
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-	{
-		playerOne->moveUp();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-	{
-		playerOne->moveDown();
-	}
-}
-
 void PlayingState::update()
 {
 	ball->update();
@@ -66,4 +50,45 @@ void PlayingState::render()
 	playerTwo->draw();
 	
 	ball->draw();
+}
+
+
+// Commands
+void PlayingState::PlayerOneMoveUp()
+{
+	playerOne->moveUp();
+}
+void PlayingState::PlayerOneMoveDown()
+{
+	playerOne->moveDown();
+}
+
+void PlayingState::PlayerTwoMoveUp()
+{
+	if (true) // Will be changed to Game Mode check
+		return;
+	playerTwo->moveUp();
+}
+void PlayingState::PlayerTwoMoveDown()
+{
+	if (true) // Will be changed to Game Mode check
+		return;
+
+	playerTwo->moveDown();
+}
+
+void PlayingState::Pause()
+{
+	// Go to Pause state
+	StateManager::ChangeState(new MenuState());
+}
+void PlayingState::Select()
+{
+	// Select -> Does nothing in Playing State
+	return;
+}
+void PlayingState::Return()
+{
+	// Return (Go back to previous state) -> Does nothing in Playing State
+	return;
 }
