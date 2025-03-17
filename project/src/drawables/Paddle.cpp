@@ -26,18 +26,12 @@ float Paddle::getBottom() const
 {
 	return rect.getPosition().y + (paddleSize.y / 2);
 }
-float Paddle::getFront() const
+float Paddle::getLeft() const
 {
-	if (side == PaddleSide::LEFT)
-		return rect.getPosition().x + (paddleSize.x / 2);
-
 	return rect.getPosition().x - (paddleSize.x / 2);
 }
-float Paddle::getBack() const
+float Paddle::getRight() const
 {
-	if (side == PaddleSide::LEFT)
-		return rect.getPosition().x - (paddleSize.x / 2);
-
 	return rect.getPosition().x + (paddleSize.x / 2);
 }
 
@@ -45,12 +39,12 @@ bool Paddle::checkCollisions(const Drawable* object)
 {
     if (side == PaddleSide::LEFT)
     {
-		return (object->getBack() < getFront() && object->getBack() > getCenterX() &&
+		return (object->getLeft() < getRight() && object->getLeft() > getCenterX() &&
 			object->getBottom() >= getTop() && object->getTop() <= getBottom());
     }
     else if (side == PaddleSide::RIGHT)
     {
-		return (object->getFront() > getFront() && object->getFront() < getCenterX() &&
+		return (object->getRight() > getLeft() && object->getRight() < getCenterX() &&
 			object->getBottom() >= getTop() && object->getTop() <= getBottom());
     }
 }

@@ -19,6 +19,12 @@
 #include <cmath>
 #include <memory>
 
+enum class GameMode
+{
+	PLAYER_VS_COMPUTER,
+	LOCAL_PLAYER_VS_PLAYER
+};
+
 /*
 * @class PlayingState
 * @brief Playing State of the Game - Signifies the User is playing the Game
@@ -28,7 +34,7 @@
 class PlayingState : public State
 {
 public:
-	PlayingState();
+	PlayingState(GameMode mode);
 	~PlayingState();
 
 	virtual void update() override;
@@ -46,6 +52,9 @@ public:
 private:
 	// Private Functions
 	void initialiseText();
+
+	// Chosen Game Mode
+	GameMode mode;
 
 	// Score Manager 
 	ScoreManager* scoreManager = nullptr;

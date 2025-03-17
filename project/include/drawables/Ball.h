@@ -33,8 +33,8 @@ public:
 	// Pure Virtual Functions from Drawable
 	virtual float getTop() const override;
 	virtual float getBottom() const override;
-	virtual float getFront() const override;
-	virtual float getBack() const override;
+	virtual float getLeft() const override;
+	virtual float getRight() const override;
 
 private:
 	// Collision Check Functions

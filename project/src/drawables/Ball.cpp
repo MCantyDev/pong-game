@@ -145,12 +145,12 @@ float Ball::getBottom() const
 	return circle.getPosition().y + ballRadius;
 }
 
-float Ball::getFront() const
-{
-	return circle.getPosition().x + ballRadius;
-}
-
-float Ball::getBack() const
+float Ball::getLeft() const
 {
 	return circle.getPosition().x - ballRadius;
+}
+
+float Ball::getRight() const
+{
+	return circle.getPosition().x + ballRadius;
 }

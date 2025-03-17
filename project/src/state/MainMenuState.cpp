@@ -12,11 +12,23 @@ MainMenuState::MainMenuState()
 		throw std::runtime_error("Failed to Load Font");
 
 	initialiseGraphics();
+
+	button.setOnClick([](){
+		StateManager::ChangeState(new PlayingState(GameMode::PLAYER_VS_COMPUTER));
+	});
 }
 
 void MainMenuState::update()
 {
-
+	try
+	{
+		button.checkHovered();
+		button.checkClicked();
+	}
+	catch (std::runtime_error e)
+	{
+		std::cerr << "Exception Caught - Error: " << e.what() << std::endl;
+	}
 }
 
 void MainMenuState::render()
@@ -27,19 +39,16 @@ void MainMenuState::render()
 	window.draw(ball);
 
 	window.draw(titleText);
-	window.draw(instructionText);
+
+	button.draw();
 }
 
 void MainMenuState::initialiseText()
 {
 	sf::FloatRect ttb = titleText.getLocalBounds();
-	sf::FloatRect it = instructionText.getLocalBounds();
 
 	titleText.setOrigin({ ttb.size.x / 2, ttb.size.y / 2 });
 	titleText.setPosition({ (float)window.getSize().x / 2, ((float)window.getSize().y / 2) - 50.f});
-
-	instructionText.setOrigin({ it.size.x / 2, it.size.y / 2 });
-	instructionText.setPosition({ (float)window.getSize().x / 2, (float)window.getSize().y / 2 + 50.f});
 }
 
 void MainMenuState::initialiseGraphics()
@@ -97,5 +106,5 @@ void MainMenuState::Select()
 }
 void MainMenuState::Return()
 {
-	StateManager::ChangeState(new PlayingState());
+
 }

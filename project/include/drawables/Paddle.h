@@ -21,8 +21,8 @@ public:
 
 	virtual float getTop() const override;
 	virtual float getBottom() const override;
-	virtual float getFront() const override;
-	virtual float getBack() const override;
+	virtual float getLeft() const override;
+	virtual float getRight() const override;
 
 	// What Paddle Needs to be able to do
 	// - Move Up

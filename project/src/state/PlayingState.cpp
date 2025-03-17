@@ -3,9 +3,9 @@
 // Different State Types
 #include "state/MainMenuState.h"
 
-PlayingState::PlayingState()
+PlayingState::PlayingState(GameMode mode)
 	:
-	scoreManager(ScoreManager::GetInstance()),
+	scoreManager(ScoreManager::GetInstance()), mode(mode),
 	playerOne(new Paddle(PaddleSide::LEFT)), playerTwo(new AiPaddle(PaddleSide::RIGHT)),
 	ball(new Ball(playerOne, playerTwo)),
 	leftScoreText(font, "0", 50.f),
@@ -16,7 +16,7 @@ PlayingState::PlayingState()
 	playerOne->setColour(sf::Color(200, 50, 50));
 	playerTwo->setColour(sf::Color(50, 50, 200));
 	
-	if (true) // Will be changed to If Mode is Player VS AI
+	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to If Mode is Player VS AI
 	{
 		aiPaddle = static_cast<AiPaddle*>(playerTwo);
 		aiPaddle->setObject(ball);
@@ -90,13 +90,13 @@ void PlayingState::PlayerOneMoveDown()
 
 void PlayingState::PlayerTwoMoveUp()
 {
-	if (true) // Will be changed to Game Mode check
+	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to Game Mode check
 		return;
 	playerTwo->moveUp();
 }
 void PlayingState::PlayerTwoMoveDown()
 {
-	if (true) // Will be changed to Game Mode check
+	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to Game Mode check
 		return;
 
 	playerTwo->moveDown();

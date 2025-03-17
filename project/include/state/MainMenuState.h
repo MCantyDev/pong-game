@@ -8,6 +8,9 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
+// Utility Includes
+#include "utility/RectButton.h"
+
 /*
 * @class MenuState
 * @brief Menu State of the Game - Signifies the User is at the Main Menu of the Game
@@ -36,11 +39,16 @@ private:
 	void initialiseText();
 	void initialiseGraphics();
 
+	void playerVsAiButtonClickFunction();
+
 	sf::RenderWindow& window;
 
 	sf::Font font;
 	sf::Text titleText = sf::Text(font, "Pong!", 50);
-	sf::Text instructionText = sf::Text(font, "Press Enter to Play");
+
+	// Buttons
+	RectButton button = RectButton(std::string("Play (vs Ai)"), 30,
+		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 50.f));
 
 	// Shapes for Paddle and Ball Graphics
 	sf::RectangleShape leftPaddle;
