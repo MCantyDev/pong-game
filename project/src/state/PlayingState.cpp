@@ -56,13 +56,13 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	RenderWindowManager::GetWindow()->draw(leftScoreText);
-	RenderWindowManager::GetWindow()->draw(rightScoreText);
+	RenderWindowManager::Draw(leftScoreText);
+	RenderWindowManager::Draw(rightScoreText);
+
+	ball->draw(); // Must be drawn before paddles to make it not overlap
 
 	playerOne->draw();
 	playerTwo->draw();
-	
-	ball->draw();
 }
 
 void PlayingState::initialiseText()

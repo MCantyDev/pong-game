@@ -9,7 +9,7 @@ Drawable::~Drawable()
 // Draw Function
 void Drawable::draw(bool originVisable)
 {
-	window->draw(*shape);
+	RenderWindowManager::Draw(*shape);
 
 	// Draw the Origin Point
 	if (originVisable)
@@ -18,7 +18,7 @@ void Drawable::draw(bool originVisable)
 		originMarker.setFillColor(sf::Color::White);
 		originMarker.setPosition({ shape->getPosition().x, shape->getPosition().y });
 		originMarker.setOrigin({ 3, 3 });
-		window->draw(originMarker);
+		RenderWindowManager::Draw(originMarker);
 	}
 }
 

@@ -42,8 +42,8 @@ void Button::checkHovered()
 
 void Button::draw(bool originVisable)
 {
-	RenderWindowManager::GetWindow()->draw(*shape);
-	RenderWindowManager::GetWindow()->draw(buttonText);
+	RenderWindowManager::Draw(*shape);
+	RenderWindowManager::Draw(buttonText);
 
 	// Draw the Origin Point
 	if (originVisable)
@@ -52,6 +52,6 @@ void Button::draw(bool originVisable)
 		originMarker.setFillColor(sf::Color::White);
 		originMarker.setPosition({ shape->getPosition().x, shape->getPosition().y });
 		originMarker.setOrigin({ 3, 3 });
-		RenderWindowManager::GetWindow()->draw(originMarker);
+		RenderWindowManager::Draw(originMarker);
 	}
 }

@@ -36,9 +36,6 @@ public:
 
 protected:
 	sf::Shape* shape = nullptr; // Flexible Shape pointer
-
-private:
-	sf::RenderWindow* window = RenderWindowManager::GetWindow();
 };
 
 #endif // DRAWABLE_H

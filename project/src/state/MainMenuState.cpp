@@ -4,13 +4,11 @@
 #include "state/PlayingState.h"
 
 MainMenuState::MainMenuState()
-	: window(*RenderWindowManager::GetWindow())
 {
-	if (font.openFromFile("fonts/MainFont.ttf"))
-		initialiseText();
-	else
+	if (!font.openFromFile("fonts/MainFont.ttf"))
 		throw std::runtime_error("Failed to Load Font");
 
+	initialiseText();
 	initialiseGraphics();
 	initialiseButtons();
 }
@@ -34,11 +32,12 @@ void MainMenuState::update()
 void MainMenuState::render()
 {
 	// Draw Graphics
-	window.draw(leftPaddle);
-	window.draw(rightPaddle);
-	window.draw(ball);
+	RenderWindowManager::Draw(ball);
 
-	window.draw(titleText);
+	RenderWindowManager::Draw(leftPaddle);
+	RenderWindowManager::Draw(rightPaddle);
+
+	RenderWindowManager::Draw(titleText);
 
 	for (auto& button : buttons)
 	{
@@ -51,7 +50,7 @@ void MainMenuState::initialiseText()
 	sf::FloatRect ttb = titleText.getLocalBounds();
 
 	titleText.setOrigin({ ttb.size.x / 2, ttb.size.y / 2 });
-	titleText.setPosition({ (float)window.getSize().x / 2, ((float)window.getSize().y / 2) - 50.f});
+	titleText.setPosition({ RenderWindowManager::GetWidth() / 2, (RenderWindowManager::GetHeight() / 2) - 50.f});
 }
 
 void MainMenuState::initialiseGraphics()
@@ -93,6 +92,12 @@ void MainMenuState::initialiseButtons()
 		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 125.f),
 		[this]() { this->playerVsPlayer(); }
 	));
+
+	buttons.push_back(ButtonFactory::CreateButton(ButtonType::RECTANGLE_BUTTON,
+		"Exit", 30,
+		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 200.f),
+		[this]() { this->closeWindow(); }
+	));
 }
 
 // Button On Click functions
@@ -103,6 +108,10 @@ void MainMenuState::playerVsAi()
 void MainMenuState::playerVsPlayer()
 {
 	StateManager::SetChangeState(std::make_unique<PlayingState>(GameMode::LOCAL_PLAYER_VS_PLAYER));
+}
+void MainMenuState::closeWindow()
+{
+	RenderWindowManager::CloseWindow();
 }
 
 // Commands

@@ -43,6 +43,7 @@ private:
 	// Button Click Functions
 	void mainMenu();
 	void playAgain();
+	void closeWindow();
 
 	// Private Variables
 	PaddleSide winner;
@@ -55,7 +56,6 @@ private:
 
 	// Buttons
 	std::vector<std::unique_ptr<Button>> buttons;
-
 };
 
 #endif // GAMEOVERSTATE_H

@@ -48,7 +48,7 @@ private:
 	const char* title = "Pong";
 	const float WIDTH = 1200.f;
 	const float HEIGHT = 800.f;
-	sf::RenderWindow& window;
+	sf::RenderWindow* window;
 
 	// States
 	StateManager* stateManager = nullptr;

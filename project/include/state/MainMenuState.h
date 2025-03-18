@@ -45,8 +45,7 @@ private:
 
 	void playerVsAi();
 	void playerVsPlayer();
-
-	sf::RenderWindow& window;
+	void closeWindow();
 
 	sf::Font font;
 	sf::Text titleText = sf::Text(font, "Pong!", 50);

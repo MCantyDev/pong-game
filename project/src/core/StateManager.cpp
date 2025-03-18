@@ -54,7 +54,7 @@ void StateManager::SetChangeState(std::unique_ptr<State> newState)
 
 void StateManager::CheckStateChange()
 {
-    if (nextState)
+    if (nextState && changeState)
     {
         state = std::move(nextState);
         InputManager::InitialiseBindingsForState();

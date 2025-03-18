@@ -30,8 +30,8 @@ void GameOverState::render()
 	{
 		button->draw();
 	}
-	RenderWindowManager::GetWindow()->draw(scoreText);
-	RenderWindowManager::GetWindow()->draw(winnerText);
+	RenderWindowManager::Draw(scoreText);
+	RenderWindowManager::Draw(winnerText);
 }
 
 void GameOverState::initialiseText(PaddleSide winner, GameMode mode)
@@ -79,6 +79,12 @@ void GameOverState::initialiseButtons()
 		sf::Vector2f((RenderWindowManager::GetWidth() / 2) + 200.f, (RenderWindowManager::GetHeight() / 2) + 175.f),
 		[this]() { mainMenu(); }
 	));
+
+	buttons.push_back(ButtonFactory::CreateButton(ButtonType::RECTANGLE_BUTTON,
+		"Exit", 30,
+		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 250.f),
+		[this]() { this->closeWindow(); }
+	));
 }
 
 // Button Functions
@@ -89,6 +95,10 @@ void GameOverState::playAgain()
 void GameOverState::mainMenu()
 {
 	StateManager::SetChangeState(std::make_unique<MainMenuState>());
+}
+void GameOverState::closeWindow()
+{
+	RenderWindowManager::CloseWindow();
 }
 
 // Command Overrides
