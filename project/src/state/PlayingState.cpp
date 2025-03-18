@@ -6,7 +6,8 @@
 PlayingState::PlayingState(GameMode mode)
 	:
 	scoreManager(ScoreManager::GetInstance()), mode(mode),
-	playerOne(new Paddle(PaddleSide::LEFT)), playerTwo(new AiPaddle(PaddleSide::RIGHT)),
+	playerOne(new Paddle(PaddleSide::LEFT)), 
+	playerTwo((mode == GameMode::PLAYER_VS_COMPUTER) ? new AiPaddle(PaddleSide::RIGHT) : new Paddle(PaddleSide::RIGHT)),
 	ball(new Ball(playerOne, playerTwo)),
 	leftScoreText(font, "0", 50.f),
 	rightScoreText(font, "0", 50.f)
@@ -46,7 +47,7 @@ void PlayingState::update()
 
 	if (scoreManager->checkGameEnd())
 	{
-		StateManager::ChangeState(new MainMenuState());
+		StateManager::SetChangeState(std::make_unique<MainMenuState>());
 	}
 
 	leftScoreText.setString(std::to_string(ScoreManager::GetScore(PaddleSide::LEFT)));
@@ -90,13 +91,14 @@ void PlayingState::PlayerOneMoveDown()
 
 void PlayingState::PlayerTwoMoveUp()
 {
-	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to Game Mode check
+	if (mode == GameMode::PLAYER_VS_COMPUTER)
 		return;
+
 	playerTwo->moveUp();
 }
 void PlayingState::PlayerTwoMoveDown()
 {
-	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to Game Mode check
+	if (mode == GameMode::PLAYER_VS_COMPUTER)
 		return;
 
 	playerTwo->moveDown();
@@ -105,7 +107,7 @@ void PlayingState::PlayerTwoMoveDown()
 void PlayingState::Pause()
 {
 	// Go to Pause state
-	StateManager::ChangeState(new MainMenuState());
+	StateManager::SetChangeState(std::make_unique<MainMenuState>());
 }
 void PlayingState::Select()
 {

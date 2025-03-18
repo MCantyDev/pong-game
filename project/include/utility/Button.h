@@ -14,11 +14,10 @@
 class Button : public Drawable
 {
 public:
-	Button(std::string innerText, int textSize);
+	Button(std::string innerText, int textSize, std::function<void()> onClickFunction);
 
 	void checkClicked();
 	void checkHovered();
-	void setOnClick(std::function<void()> onClickFunction);
 
 	// Pure Virtual Functions (overriden)
 	virtual float getTop() const = 0;
@@ -34,7 +33,7 @@ private:
 protected:
 	// Button properties
 	sf::Text buttonText;
-	sf::Font font;
+	static sf::Font font;
 	int padding; // Percentage based
 };
 

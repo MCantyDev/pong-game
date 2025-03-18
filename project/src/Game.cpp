@@ -30,6 +30,7 @@ void Game::run()
 		window.clear(sf::Color(25, 25, 25));
 		
 		deltaClock->update();
+		StateManager::CheckStateChange();
 
 		inputManager->HandleInput();
 		stateManager->update();

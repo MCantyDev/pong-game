@@ -6,7 +6,7 @@
 class RectButton : public Button
 {
 public:
-	RectButton(std::string innerText, int fontSize, sf::Vector2f position);
+	RectButton(std::string innerText, int fontSize, sf::Vector2f position, std::function<void()> onClick);
 
 	// Pure Virtual Functions (overriden)
 	virtual float getTop() const override;

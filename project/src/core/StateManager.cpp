@@ -9,24 +9,27 @@
 #include "command/InputManager.h"
 
 StateManager* StateManager::instance = nullptr;
-State* StateManager::state = nullptr;
 
-sf::Clock StateManager::swapClock = sf::Clock();
-bool StateManager::canAction = false;
+std::unique_ptr<State> StateManager::state = nullptr;
+std::unique_ptr<State> StateManager::nextState = nullptr;
+
+bool StateManager::changeState = false;
+sf::Clock StateManager::swapClock;
+bool StateManager::canAction = true;
 float StateManager::debounceTime = 1.f;
 
 StateManager::StateManager()
 {
-	state = new MainMenuState();
+	state = std::make_unique<MainMenuState>();
 	InputManager::InitialiseBindingsForState();
 }
 
 StateManager::~StateManager()
 {
-	if (state)
+	if (instance)
 	{
-		delete state;
-		state = nullptr;
+		delete instance;
+		instance = nullptr;
 	}
 }
 
@@ -38,29 +41,32 @@ StateManager* StateManager::GetInstance()
 	return instance;
 }
 
-void StateManager::ChangeState(State* newState)
+void StateManager::SetChangeState(std::unique_ptr<State> newState)
 {
-	if (canAction && state != newState)
-	{
+    if (canAction && swapClock.getElapsedTime().asSeconds() >= debounceTime)
+    {
+        nextState = std::move(newState);
+        changeState = true;
+        swapClock.restart();
+        canAction = false; 
+    }
+}
 
-		delete state;
-		state = newState;
-		
-		InputManager::InitialiseBindingsForState();
+void StateManager::CheckStateChange()
+{
+    if (nextState)
+    {
+        state = std::move(nextState);
+        InputManager::InitialiseBindingsForState();
 
-		swapClock.restart();
-		canAction = false;
-	}
-
-	if (swapClock.getElapsedTime().asSeconds() >= debounceTime)
-	{
-		canAction = true;
-	}
+		changeState = false;
+		canAction = true; 
+    }
 }
 
 State* StateManager::GetState()
 {
-	return state;
+	return state.get();
 }
 
 void StateManager::update()

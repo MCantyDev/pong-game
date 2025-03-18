@@ -12,18 +12,18 @@ MainMenuState::MainMenuState()
 		throw std::runtime_error("Failed to Load Font");
 
 	initialiseGraphics();
-
-	button.setOnClick([](){
-		StateManager::ChangeState(new PlayingState(GameMode::PLAYER_VS_COMPUTER));
-	});
+	initialiseButtons();
 }
 
 void MainMenuState::update()
 {
 	try
 	{
-		button.checkHovered();
-		button.checkClicked();
+		for (auto& button : buttons)
+		{
+			button->checkHovered();
+			button->checkClicked();
+		}
 	}
 	catch (std::runtime_error e)
 	{
@@ -40,7 +40,10 @@ void MainMenuState::render()
 
 	window.draw(titleText);
 
-	button.draw();
+	for (auto& button : buttons)
+	{
+		button->draw();
+	}
 }
 
 void MainMenuState::initialiseText()
@@ -77,6 +80,31 @@ void MainMenuState::initialiseGraphics()
 	ball.setPosition({ RenderWindowManager::GetWidth() - 200.f, 250.f });
 }
 
+void MainMenuState::initialiseButtons()
+{
+	buttons.push_back(ButtonFactory::CreateButton(ButtonType::RECTANGLE_BUTTON,
+		"Play (vs Ai)", 30,
+		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 50.f),
+		[this]() { this->playerVsAi(); }
+	));
+
+	buttons.push_back(ButtonFactory::CreateButton(ButtonType::RECTANGLE_BUTTON,
+		"Play (2 player Local)", 30,
+		sf::Vector2f(RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 + 125.f),
+		[this]() { this->playerVsPlayer(); }
+	));
+}
+
+// Button On Click functions
+void MainMenuState::playerVsAi()
+{
+	StateManager::SetChangeState(std::make_unique<PlayingState>(GameMode::PLAYER_VS_COMPUTER));
+}
+void MainMenuState::playerVsPlayer()
+{
+	StateManager::SetChangeState(std::make_unique<PlayingState>(GameMode::LOCAL_PLAYER_VS_PLAYER));
+}
+
 // Commands
 void MainMenuState::PlayerOneMoveUp()
 {
@@ -106,5 +134,5 @@ void MainMenuState::Select()
 }
 void MainMenuState::Return()
 {
-
+	StateManager::SetChangeState(std::make_unique<PlayingState>(GameMode::PLAYER_VS_COMPUTER));
 }

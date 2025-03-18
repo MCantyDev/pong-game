@@ -1,7 +1,10 @@
 #include "utility/Button.h"
 
-Button::Button(std::string innerText, int textSize)
-	: buttonText(font, innerText, textSize), padding(10)
+sf::Font Button::font;
+
+Button::Button(std::string innerText, int textSize, std::function<void()> onClickFunction)
+	: buttonText(font, innerText, textSize), padding(10),
+	onClick(std::move(onClickFunction))
 {
 	if (!font.openFromFile("fonts/MainFont.ttf"))
 		throw std::runtime_error("Failed to Load font: fonts/MainFont.ttf");
@@ -15,12 +18,10 @@ void Button::checkClicked()
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && 
 		(mousePos.y > getTop() && mousePos.y < getBottom()) &&
-		(mousePos.x > getLeft() && mousePos.y < getRight()))
+		(mousePos.x > getLeft() && mousePos.x < getRight()))
 	{
-		if (!this->onClick)
-			throw std::runtime_error("Please Set Function for Button");
-
-		onClick();
+		if (onClick)
+			onClick();
 	}
 }
 
@@ -29,7 +30,7 @@ void Button::checkHovered()
 	sf::Vector2i mousePos = sf::Mouse::getPosition(*RenderWindowManager::GetWindow());
 
 	if ((mousePos.y > getTop() && mousePos.y < getBottom()) &&
-		(mousePos.x > getLeft() && mousePos.y < getRight()))
+		(mousePos.x > getLeft() && mousePos.x < getRight()))
 	{
 		shape->setOutlineColor(sf::Color::Blue);
 		return;
@@ -37,11 +38,6 @@ void Button::checkHovered()
 	
 	if (shape->getOutlineColor() == sf::Color::Blue)
 		shape->setOutlineColor(sf::Color::Black);
-}
-
-void Button::setOnClick(std::function<void()> onClickFunction)
-{
-	this->onClick = onClickFunction;
 }
 
 void Button::draw(bool originVisable)

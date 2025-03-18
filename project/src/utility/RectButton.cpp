@@ -1,7 +1,7 @@
 #include "utility/RectButton.h"
 
-RectButton::RectButton(std::string innerText, int fontSize, sf::Vector2f position)
-    : Button(innerText, fontSize)
+RectButton::RectButton(std::string innerText, int fontSize, sf::Vector2f position, std::function<void()> onClick)
+    : Button(innerText, fontSize, onClick)
 {
     sf::FloatRect textBounds = buttonText.getLocalBounds();
     sf::Vector2f textSize(textBounds.size.x, textBounds.size.y);
