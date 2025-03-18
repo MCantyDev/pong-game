@@ -2,6 +2,7 @@
 #define PLAYINGSTATE_H
 
 #include "state/State.h"
+#include "GameEnums.h"
 
 // Drawable Include
 #include "drawables/Paddle.h"
@@ -18,12 +19,6 @@
 #include <random>
 #include <cmath>
 #include <memory>
-
-enum class GameMode
-{
-	PLAYER_VS_COMPUTER,
-	LOCAL_PLAYER_VS_PLAYER
-};
 
 /*
 * @class PlayingState

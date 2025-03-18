@@ -7,11 +7,7 @@
 // Drawable Include
 #include "drawables/Drawable.h"
 
-enum class PaddleSide
-{
-	LEFT,
-	RIGHT
-};
+#include "GameEnums.h"
 
 class Paddle : public Drawable
 {

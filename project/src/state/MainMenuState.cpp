@@ -134,5 +134,5 @@ void MainMenuState::Select()
 }
 void MainMenuState::Return()
 {
-	StateManager::SetChangeState(std::make_unique<PlayingState>(GameMode::PLAYER_VS_COMPUTER));
+	return;
 }

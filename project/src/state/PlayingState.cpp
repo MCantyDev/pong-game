@@ -2,6 +2,7 @@
 
 // Different State Types
 #include "state/MainMenuState.h"
+#include "state/GameOverState.h"
 
 PlayingState::PlayingState(GameMode mode)
 	:
@@ -46,9 +47,8 @@ void PlayingState::update()
 		aiPaddle->update();
 
 	if (scoreManager->checkGameEnd())
-	{
-		StateManager::SetChangeState(std::make_unique<MainMenuState>());
-	}
+		StateManager::SetChangeState(
+			std::make_unique<GameOverState>(ScoreManager::GetWinner(), mode));
 
 	leftScoreText.setString(std::to_string(ScoreManager::GetScore(PaddleSide::LEFT)));
 	rightScoreText.setString(std::to_string(ScoreManager::GetScore(PaddleSide::RIGHT)));

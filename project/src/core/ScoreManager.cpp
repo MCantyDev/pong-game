@@ -9,6 +9,8 @@ int ScoreManager::leftTotalWins = 0;
 int ScoreManager::rightScore = 0;
 int ScoreManager::rightTotalWins = 0;
 
+const int ScoreManager::WINNING_SCORE;
+
 ScoreManager* ScoreManager::GetInstance()
 {
 	if (!instance)
@@ -46,6 +48,14 @@ int ScoreManager::GetScore(PaddleSide side)
 		return leftScore;
 
 	return rightScore;
+}
+
+PaddleSide ScoreManager::GetWinner()
+{
+	if (leftScore == WINNING_SCORE)
+		return PaddleSide::LEFT;
+
+	return PaddleSide::RIGHT;
 }
 
 void ScoreManager::ResetScores()
