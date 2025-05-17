@@ -1,11 +1,18 @@
-#ifndef MENUSTATE_H
-#define MENUSTATE_H
+#ifndef MAINMENUSTATE_H
+#define MAINMENUSTATE_H
 
 #include "state/State.h"
 
 // SMFL Includes
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+
+// Utility Includes
+#include "factory/ButtonFactory.h"
+
+// Standard Library Includes
+#include <vector>
 
 /*
 * @class MenuState
@@ -13,11 +20,11 @@
 * 
 * Menu State will give user access to playing state and settings state
 */
-class MenuState : public State
+class MainMenuState : public State
 {
 public:
-	MenuState();
-	~MenuState() = default;
+	MainMenuState();
+	~MainMenuState() = default;
 
 	virtual void update() override;
 	virtual void render() override;
@@ -33,13 +40,23 @@ public:
 
 private:
 	void initialiseText();
+	void initialiseGraphics();
+	void initialiseButtons();
 
-	sf::RenderWindow& window;
+	void playerVsAi();
+	void playerVsPlayer();
+	void closeWindow();
 
-	sf::Font arial;
+	sf::Font font;
+	sf::Text titleText = sf::Text(font, "Pong!", 50);
 
-	sf::Text titleText = sf::Text(arial, "Pong!", 50);
-	sf::Text instructionText = sf::Text(arial, "Press Enter to Play");
+	// Buttons
+	std::vector<std::unique_ptr<Button>> buttons;
+
+	// Shapes for Paddle and Ball Graphics
+	sf::RectangleShape leftPaddle;
+	sf::RectangleShape rightPaddle;
+	sf::CircleShape ball;
 };
 
-#endif // MENUSTATE_H
+#endif // MAINMENUSTATE_H

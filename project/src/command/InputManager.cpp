@@ -28,10 +28,13 @@ InputManager* InputManager::GetInstance()
 
 void InputManager::HandleInput()
 {
-	for (const auto& [key, command] : keyBindings)
+	if (RenderWindowManager::GetWindow()->hasFocus())
 	{
-		if (sf::Keyboard::isKeyPressed(key) && command)
-			command->execute();
+		for (const auto& [key, command] : keyBindings)
+		{
+			if (sf::Keyboard::isKeyPressed(key) && command)
+				command->execute();
+		}
 	}
 }
 

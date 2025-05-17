@@ -3,11 +3,11 @@
 
 // Management Systems
 #include "command/InputManager.h"
-#include "StateManager.h"
-#include "DeltaTimeClock.h"
-#include "RenderWindowManager.h"
-#include "SoundManager.h"
-#include "ScoreManager.h"
+#include "core/StateManager.h"
+#include "core/DeltaTimeClock.h"
+#include "core/RenderWindowManager.h"
+#include "core/SoundManager.h"
+#include "core/ScoreManager.h"
 
 // SMFL Includes
 #include "SFML/Window.hpp"
@@ -48,7 +48,7 @@ private:
 	const char* title = "Pong";
 	const float WIDTH = 1200.f;
 	const float HEIGHT = 800.f;
-	sf::RenderWindow& window;
+	sf::RenderWindow* window;
 
 	// States
 	StateManager* stateManager = nullptr;

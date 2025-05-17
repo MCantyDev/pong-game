@@ -1,7 +1,4 @@
-#include "ScoreManager.h"
-
-// State -> ScoreManager can only change Game State inside of Playing State
-#include "state/MenuState.h"
+#include "core/ScoreManager.h"
 
 ScoreManager* ScoreManager::instance = nullptr;
 
@@ -11,6 +8,8 @@ int ScoreManager::leftTotalWins = 0;
 
 int ScoreManager::rightScore = 0;
 int ScoreManager::rightTotalWins = 0;
+
+const int ScoreManager::WINNING_SCORE;
 
 ScoreManager* ScoreManager::GetInstance()
 {
@@ -26,8 +25,6 @@ void ScoreManager::update(PaddleSide scorer)
 		leftScore++;
 	else if (scorer == PaddleSide::RIGHT)
 		rightScore++;
-
-	std::cout << "Score: " << leftScore << " : " << rightScore << std::endl;
 }
 
 bool ScoreManager::checkGameEnd()
@@ -43,6 +40,22 @@ bool ScoreManager::checkGameEnd()
 		return true;
 	}
 	return false;
+}
+
+int ScoreManager::GetScore(PaddleSide side)
+{
+	if (side == PaddleSide::LEFT)
+		return leftScore;
+
+	return rightScore;
+}
+
+PaddleSide ScoreManager::GetWinner()
+{
+	if (leftScore == WINNING_SCORE)
+		return PaddleSide::LEFT;
+
+	return PaddleSide::RIGHT;
 }
 
 void ScoreManager::ResetScores()

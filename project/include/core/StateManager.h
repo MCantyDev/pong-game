@@ -10,6 +10,7 @@ class InputManager;
 
 // Standard Library Includes
 #include <iostream>
+#include <memory>
 
 /**
  * @class StateManager
@@ -25,25 +26,28 @@ class InputManager;
 class StateManager
 {
 public:
-	~StateManager();
-	static StateManager* GetInstance();
+    ~StateManager();
+    static StateManager* GetInstance();
 
-	// State Specific Functions - Each State will handle Input, Update and Render differently
-	void handleInput();
-	void update();
-	void render();
+    void update();
+    void render();
 
-	static void ChangeState(State* newState);
-	static State* GetState();
+    static void SetChangeState(std::unique_ptr<State> newState);
+    static void CheckStateChange();
+
+    static State* GetState();
 
 private:
-	StateManager();
-	static StateManager* instance;
-	static State* state;
+    StateManager();
+    static StateManager* instance;
 
-	static sf::Clock swapClock;
-	static bool canAction;
-	static float debounceTime;
+    static std::unique_ptr<State> state;
+    static std::unique_ptr<State> nextState;
+    static bool changeState;
+
+    static sf::Clock swapClock;
+    static bool canAction;
+    static float debounceTime;
 };
 
 #endif // STATEMANAGER_H

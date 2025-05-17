@@ -2,9 +2,7 @@
 #define PLAYINGSTATE_H
 
 #include "state/State.h"
-#include "DeltaTimeClock.h"
-#include "RenderWindowManager.h"
-#include "ScoreManager.h"
+#include "GameEnums.h"
 
 // Drawable Include
 #include "drawables/Paddle.h"
@@ -31,7 +29,7 @@
 class PlayingState : public State
 {
 public:
-	PlayingState();
+	PlayingState(GameMode mode);
 	~PlayingState();
 
 	virtual void update() override;
@@ -48,7 +46,10 @@ public:
 
 private:
 	// Private Functions
-	void initialiseSounds();		// Loads Sounds from Files
+	void initialiseText();
+
+	// Chosen Game Mode
+	GameMode mode;
 
 	// Score Manager 
 	ScoreManager* scoreManager = nullptr;
@@ -62,6 +63,11 @@ private:
 
 	// Ball Values
 	Ball* ball = nullptr;
+
+	// Text Scores
+	sf::Font font;
+	sf::Text leftScoreText;
+	sf::Text rightScoreText;
 };
 
 #endif // PLAYINGSTATE_H

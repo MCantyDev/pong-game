@@ -20,12 +20,14 @@ public:
 	bool checkGameEnd();
 	static void ResetScores();
 	static void ResetTotalWins();
+	static int GetScore(PaddleSide side);
+	static PaddleSide GetWinner();
 
 private:
 	ScoreManager() = default;
 	static ScoreManager* instance;
 
-	const int WINNING_SCORE = 3;
+	static const int WINNING_SCORE = 5;
 
 	static int leftScore;
 	static int rightScore;

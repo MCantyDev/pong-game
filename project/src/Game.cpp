@@ -2,12 +2,12 @@
 
 Game::Game()
 	: 
-	window(*RenderWindowManager::GetWindow()), 
+	window(RenderWindowManager::GetWindow()), 
 	stateManager(StateManager::GetInstance()), inputManager(InputManager::GetInstance()),
 	deltaClock(DeltaTimeClock::GetInstance()), soundManager(SoundManager::GetInstance()),
 	scoreManager(ScoreManager::GetInstance())
 {
-	window.setVerticalSyncEnabled(true);
+	window->setVerticalSyncEnabled(true);
 
 	initialiseSounds();
 	initialiseBackgroundMusic();
@@ -16,26 +16,28 @@ Game::Game()
 
 void Game::run()
 {
-	while (window.isOpen())
+	while (window->isOpen())
 	{
-		while (const std::optional event = window.pollEvent())
+		while (const std::optional event = window->pollEvent())
 		{
 			if (event->is<sf::Event::Closed>())
 			{
-				window.close();
+				window->close();
 				break;
 			}
 		}
 
-		window.clear(sf::Color(50, 50, 50));
+		window->clear(sf::Color(25, 25, 25));
 		
 		deltaClock->update();
 
-		inputManager->HandleInput();
+		StateManager::CheckStateChange();
+		InputManager::HandleInput();
+
 		stateManager->update();
 		stateManager->render();
 
-		window.display();
+		window->display();
 	}
 }
 

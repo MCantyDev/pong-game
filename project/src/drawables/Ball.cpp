@@ -1,7 +1,6 @@
 #include "drawables/Ball.h"
 
 #include "drawables/Paddle.h"
-#include <iostream>
 
 Ball::Ball(Paddle* p1, Paddle* p2)
 	: playerOne(p1), playerTwo(p2),
@@ -146,12 +145,12 @@ float Ball::getBottom() const
 	return circle.getPosition().y + ballRadius;
 }
 
-float Ball::getFront() const
-{
-	return circle.getPosition().x + ballRadius;
-}
-
-float Ball::getBack() const
+float Ball::getLeft() const
 {
 	return circle.getPosition().x - ballRadius;
+}
+
+float Ball::getRight() const
+{
+	return circle.getPosition().x + ballRadius;
 }
