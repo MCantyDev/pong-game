@@ -17,8 +17,8 @@ class InputManager;
  * @brief Manages the states of the game.
  *
  * The StateManager ensures that state transitions follow a logical pattern,
- * such as Menu -> Playing, Playing -> Paused, and prevents invalid transitions
- * (e.g., Menu -> Paused).
+ * such as Menu -> Playing, Playing -> GameOver, and prevents invalid transitions
+ * (e.g., Menu -> GameOver).
  *
  * The manager handles the current state and ensures smooth transitions
  * between states, making sure game logic is properly handled at all times.

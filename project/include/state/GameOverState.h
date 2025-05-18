@@ -17,6 +17,12 @@
 // Standard Library Includes
 #include <vector>
 
+/*
+* @class GameOverState
+* @brief Game Over State of the Game - Signifies the game has ended
+*
+* Game Over State allows user to return to Play Again, Return to Main Menu, or Exit Application
+*/
 class GameOverState : public State
 {
 public:

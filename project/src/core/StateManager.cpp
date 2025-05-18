@@ -41,6 +41,7 @@ StateManager* StateManager::GetInstance()
 	return instance;
 }
 
+// Important Function which has a Debounce time to ensure States can be changed multiple times within a short span of time
 void StateManager::SetChangeState(std::unique_ptr<State> newState)
 {
     if (canAction && swapClock.getElapsedTime().asSeconds() >= debounceTime)

@@ -8,10 +8,12 @@ std::unique_ptr<Button> ButtonFactory::CreateButton(ButtonType type,
 	sf::Vector2f position,
 	std::function<void()> onClick)
 {
-	if (type == ButtonType::RECTANGLE_BUTTON)
-	{
-		return std::make_unique<RectButton>(text, fontSize, position, onClick);
-	}
+	// Update to Switch statement as looks cleaner
+	switch (type) {
+		case ButtonType::RECTANGLE_BUTTON:
+			return std::make_unique<RectButton>(text, fontSize, position, onClick);
 
-	return nullptr;
+		default:
+			return nullptr;
+	}
 }

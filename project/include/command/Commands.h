@@ -5,6 +5,11 @@
 
 #include "state/State.h"
 
+/**
+* Commands are the invidual commands used across the Pong game, the InputManager uses these commands to process functionality between game states.
+*/
+
+// Commands
 class PlayerOneMoveUp : public Command
 {
 public:

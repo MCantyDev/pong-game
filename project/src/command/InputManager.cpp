@@ -42,6 +42,9 @@ void InputManager::SetBinding(sf::Keyboard::Key key, Command* command)
 {
 	keyBindings[key] = std::move(command);
 }
+
+// Could be done differently but there was no need to swap within codebase (As not many commands required for application)
+// One way would be using a JSON object with all Input settings and binding the appropriate Keys to the correct values defaulting to null for any values that just dont exist in the codebase
 void InputManager::InitialiseBindingsForState()
 {
 	// Initialise Some values

@@ -3,6 +3,13 @@
 
 #include "state/State.h"
 
+/**
+ * @class Command
+ * @brief Abstract Command class used to tie Inputs to Functionality
+ * 
+ * Command follows the Command Pattern
+ *
+ */
 class Command
 {
 public:

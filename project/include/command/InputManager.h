@@ -11,6 +11,14 @@
 // Standard Library Include
 #include <unordered_map>
 
+/*
+* @class Input Manager
+* @brief Input Manager binds commands to keyboard inputs within the Pong game
+* 
+* InputManager follows the singleton pattern as only one InputManager should be present throughout the whole application
+* Binding Commands to Input to follow the Command Pattern
+* 
+*/
 class InputManager
 {
 public:

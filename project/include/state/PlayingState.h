@@ -24,7 +24,7 @@
 * @class PlayingState
 * @brief Playing State of the Game - Signifies the User is playing the Game
 * 
-* Playing State will give user access to Paused State
+* Playing State allows Users to return to the MenuState or proceed to GameOverState if a score reaches 5
 */
 class PlayingState : public State
 {
