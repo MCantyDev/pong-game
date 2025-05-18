@@ -9,14 +9,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 # Set Output Directory for Executable
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
 
-set(DEBUG_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../libraries/lib/Debug")
-set(RELEASE_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../libraries/lib/Release")
-set(ASSETS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../project/assets")
+set(DEBUG_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/libraries/lib/Debug")
+set(RELEASE_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/libraries/lib/Release")
+set(ASSETS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/project/assets")
 
 # Include Directories
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../project/include")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../libraries/include")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/project/include")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libraries/include")
 
 # Get Correct Libraries based on Build-Type
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -26,8 +28,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     message(STATUS "Building Release version")
     file(GLOB_RECURSE LIBS "${RELEASE_LIBS}/*.lib")
 else()
-    message(WARNING "Unknown build type, using release libraries")
-    file(GLOB_RECURSE LIBS "${RELEASE_LIBS}/*.lib")
+    message(WARNING "Unknown build type, using debug libraries")
+    file(GLOB_RECURSE LIBS "${DEBUG_LIBS}/*.lib")
 endif()
 
 # Get rid of the Warnings because nothing else i do gets rid of them if i use Debug mode
@@ -37,7 +39,7 @@ if(MSVC)
 endif()
 
 # Get Source Files
-file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../project/src/*.cpp")
+file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/project/src/*.cpp")
 
 # Copy the Required Assets
 file(COPY ${ASSETS_DIR}/ DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -47,6 +49,13 @@ add_compile_definitions(SFML_STATIC)
 
 # Create the Executable
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+if(WIN32 AND MSVC AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        LINK_FLAGS "/SUBSYSTEM:WINDOWS"
+    )
+endif()
+
 
 # Link Libraries
 target_link_libraries(${PROJECT_NAME} PRIVATE 

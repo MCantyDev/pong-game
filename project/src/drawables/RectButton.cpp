@@ -1,4 +1,4 @@
-#include "utility/RectButton.h"
+#include "drawables/RectButton.h"
 
 RectButton::RectButton(std::string innerText, int fontSize, sf::Vector2f position, std::function<void()> onClick)
     : Button(innerText, fontSize, onClick)

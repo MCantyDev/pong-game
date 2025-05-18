@@ -42,7 +42,7 @@ bool Paddle::checkCollisions(const Drawable* object)
 		return (object->getLeft() < getRight() && object->getLeft() > getCenterX() &&
 			object->getBottom() >= getTop() && object->getTop() <= getBottom());
     }
-    else if (side == PaddleSide::RIGHT)
+	else
     {
 		return (object->getRight() > getLeft() && object->getRight() < getCenterX() &&
 			object->getBottom() >= getTop() && object->getTop() <= getBottom());
