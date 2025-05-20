@@ -18,10 +18,10 @@ RectButton::RectButton(std::string innerText, int fontSize, sf::Vector2f positio
     rect.setOutlineThickness(4);
     rect.setOutlineColor(sf::Color::Black);
 
-    rect.setOrigin({ rectSize.x / 2, rectSize.y / 2 });
+    rect.setOrigin({rectSize.x / 2, rectSize.y / 2});
     rect.setPosition(position);
 
-    buttonText.setOrigin({ textBounds.size.x / 2, textBounds.size.y / 2 });
+    buttonText.setOrigin({textBounds.size.x / 2, textBounds.size.y / 2});
     buttonText.setPosition(position);
 
     shape = &rect;
@@ -29,17 +29,17 @@ RectButton::RectButton(std::string innerText, int fontSize, sf::Vector2f positio
 
 float RectButton::getTop() const
 {
-	return rect.getPosition().y - (rectSize.y / 2);
+    return rect.getPosition().y - (rectSize.y / 2);
 }
 float RectButton::getBottom() const
 {
-	return rect.getPosition().y + (rectSize.y / 2);
+    return rect.getPosition().y + (rectSize.y / 2);
 }
 float RectButton::getLeft() const
 {
-	return rect.getPosition().x - (rectSize.x / 2);
+    return rect.getPosition().x - (rectSize.x / 2);
 }
 float RectButton::getRight() const
 {
-	return rect.getPosition().x + (rectSize.x / 2);
+    return rect.getPosition().x + (rectSize.x / 2);
 }

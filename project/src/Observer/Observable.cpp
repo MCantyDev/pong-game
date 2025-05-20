@@ -3,13 +3,13 @@
 #include "drawables/Paddle.h"
 
 template <typename T>
-void Observable<T>::addObserver(Observer<T>* observer)
+void Observable<T>::addObserver(Observer<T> *observer)
 {
 	observers.push_back(observer);
 }
 
 template <typename T>
-void Observable<T>::removeObserver(Observer<T>* observer)
+void Observable<T>::removeObserver(Observer<T> *observer)
 {
 	observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
 }
@@ -17,7 +17,7 @@ void Observable<T>::removeObserver(Observer<T>* observer)
 template <typename T>
 void Observable<T>::notifyObservers(T data)
 {
-	for (Observer<T>* observer : observers)
+	for (Observer<T> *observer : observers)
 	{
 		observer->update(data);
 	}

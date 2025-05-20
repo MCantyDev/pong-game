@@ -5,22 +5,21 @@
 #include "state/GameOverState.h"
 
 PlayingState::PlayingState(GameMode mode)
-	:
-	scoreManager(ScoreManager::GetInstance()), mode(mode),
-	playerOne(new Paddle(PaddleSide::LEFT)), 
-	playerTwo((mode == GameMode::PLAYER_VS_COMPUTER) ? new AiPaddle(PaddleSide::RIGHT) : new Paddle(PaddleSide::RIGHT)),
-	ball(new Ball(playerOne, playerTwo)),
-	leftScoreText(font, "0", 50.f),
-	rightScoreText(font, "0", 50.f)
+	: scoreManager(ScoreManager::GetInstance()), mode(mode),
+	  playerOne(new Paddle(PaddleSide::LEFT)),
+	  playerTwo((mode == GameMode::PLAYER_VS_COMPUTER) ? new AiPaddle(PaddleSide::RIGHT) : new Paddle(PaddleSide::RIGHT)),
+	  ball(new Ball(playerOne, playerTwo)),
+	  leftScoreText(font, "0", 50.f),
+	  rightScoreText(font, "0", 50.f)
 {
 	ScoreManager::ResetScores();
 
 	playerOne->setColour(sf::Color(200, 50, 50));
 	playerTwo->setColour(sf::Color(50, 50, 200));
-	
+
 	if (mode == GameMode::PLAYER_VS_COMPUTER) // Will be changed to If Mode is Player VS AI
 	{
-		aiPaddle = static_cast<AiPaddle*>(playerTwo);
+		aiPaddle = static_cast<AiPaddle *>(playerTwo);
 		aiPaddle->setObject(ball);
 	}
 
@@ -69,15 +68,14 @@ void PlayingState::initialiseText()
 {
 	// Left Score Text
 	sf::FloatRect lstr = leftScoreText.getLocalBounds();
-	leftScoreText.setOrigin({ lstr.size.x / 2, lstr.size.y / 2 });
-	leftScoreText.setPosition({ (RenderWindowManager::GetWidth() / 2) - 100.f, 75.f });
+	leftScoreText.setOrigin({lstr.size.x / 2, lstr.size.y / 2});
+	leftScoreText.setPosition({(RenderWindowManager::GetWidth() / 2) - 100.f, 75.f});
 
 	// Right Score Text
 	sf::FloatRect rstr = rightScoreText.getLocalBounds();
-	rightScoreText.setOrigin({ rstr.size.x / 2, rstr.size.y / 2 });
-	rightScoreText.setPosition({ (RenderWindowManager::GetWidth() / 2) + 100.f, 75.f });
+	rightScoreText.setOrigin({rstr.size.x / 2, rstr.size.y / 2});
+	rightScoreText.setPosition({(RenderWindowManager::GetWidth() / 2) + 100.f, 75.f});
 }
-
 
 // Commands
 void PlayingState::PlayerOneMoveUp()

@@ -15,11 +15,11 @@
 #include <vector>
 
 /*
-* @class MenuState
-* @brief Menu State of the Game - Signifies the User is at the Main Menu of the Game
-* 
-* Menu State will give user access to Playing state
-*/
+ * @class MenuState
+ * @brief Menu State of the Game - Signifies the User is at the Main Menu of the Game
+ *
+ * Menu State will give user access to Playing state
+ */
 class MainMenuState : public State
 {
 public:

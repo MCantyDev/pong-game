@@ -1,6 +1,6 @@
 #include "core/StateManager.h"
 
-// Different State Types 
+// Different State Types
 #include "state/State.h"
 #include "state/MainMenuState.h"
 #include "state/PlayingState.h"
@@ -8,7 +8,7 @@
 // Definition of InputManager
 #include "command/InputManager.h"
 
-StateManager* StateManager::instance = nullptr;
+StateManager *StateManager::instance = nullptr;
 
 std::unique_ptr<State> StateManager::state = nullptr;
 std::unique_ptr<State> StateManager::nextState = nullptr;
@@ -33,7 +33,7 @@ StateManager::~StateManager()
 	}
 }
 
-StateManager* StateManager::GetInstance()
+StateManager *StateManager::GetInstance()
 {
 	if (!instance)
 		instance = new StateManager();
@@ -41,31 +41,40 @@ StateManager* StateManager::GetInstance()
 	return instance;
 }
 
+void StateManager::DeleteInstance()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
 // Important Function which has a Debounce time to ensure States can be changed multiple times within a short span of time
 void StateManager::SetChangeState(std::unique_ptr<State> newState)
 {
-    if (canAction && swapClock.getElapsedTime().asSeconds() >= debounceTime)
-    {
-        nextState = std::move(newState);
-        changeState = true;
-        swapClock.restart();
-        canAction = false; 
-    }
+	if (canAction && swapClock.getElapsedTime().asSeconds() >= debounceTime)
+	{
+		nextState = std::move(newState);
+		changeState = true;
+		swapClock.restart();
+		canAction = false;
+	}
 }
 
 void StateManager::CheckStateChange()
 {
-    if (nextState && changeState)
-    {
-        state = std::move(nextState);
-        InputManager::InitialiseBindingsForState();
+	if (nextState && changeState)
+	{
+		state = std::move(nextState);
+		InputManager::InitialiseBindingsForState();
 
 		changeState = false;
-		canAction = true; 
-    }
+		canAction = true;
+	}
 }
 
-State* StateManager::GetState()
+State *StateManager::GetState()
 {
 	return state.get();
 }

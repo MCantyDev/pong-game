@@ -1,11 +1,20 @@
 #include "core/DeltaTimeClock.h"
 
-DeltaTimeClock* DeltaTimeClock::instance = nullptr;
+DeltaTimeClock *DeltaTimeClock::instance = nullptr;
 float DeltaTimeClock::deltaTime = 0.f;
 
 DeltaTimeClock::DeltaTimeClock() {}
 
-DeltaTimeClock* DeltaTimeClock::GetInstance()
+DeltaTimeClock::~DeltaTimeClock()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
+DeltaTimeClock *DeltaTimeClock::GetInstance()
 {
 	if (!instance)
 	{

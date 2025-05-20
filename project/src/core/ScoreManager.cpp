@@ -1,6 +1,6 @@
 #include "core/ScoreManager.h"
 
-ScoreManager* ScoreManager::instance = nullptr;
+ScoreManager *ScoreManager::instance = nullptr;
 
 // Score Variables
 int ScoreManager::leftScore = 0;
@@ -11,12 +11,30 @@ int ScoreManager::rightTotalWins = 0;
 
 const int ScoreManager::WINNING_SCORE;
 
-ScoreManager* ScoreManager::GetInstance()
+ScoreManager::~ScoreManager()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
+ScoreManager *ScoreManager::GetInstance()
 {
 	if (!instance)
 		instance = new ScoreManager();
 
 	return instance;
+}
+
+void ScoreManager::DeleteInstance()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
 }
 
 void ScoreManager::update(PaddleSide scorer)

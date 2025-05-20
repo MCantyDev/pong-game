@@ -14,20 +14,20 @@ void AiPaddle::update()
 
 	calcSpeed(object);
 
-	move({ 0.f, paddleSpeed * DeltaTimeClock::GetDeltaTime() });
+	move({0.f, paddleSpeed * DeltaTimeClock::GetDeltaTime()});
 
 	if (getTop() < 10.f)
-		setPosition({ RenderWindowManager::GetWidth() - 30.f, 10.f + (paddleSize.y / 2) + 0.1f});
+		setPosition({RenderWindowManager::GetWidth() - 30.f, 10.f + (paddleSize.y / 2) + 0.1f});
 	else if (getBottom() > RenderWindowManager::GetHeight() - 5.f)
-		setPosition({ RenderWindowManager::GetWidth() - 30.f, (RenderWindowManager::GetHeight() - 5.f) - (paddleSize.y / 2) - 0.1f });
+		setPosition({RenderWindowManager::GetWidth() - 30.f, (RenderWindowManager::GetHeight() - 5.f) - (paddleSize.y / 2) - 0.1f});
 }
 
-void AiPaddle::setObject(Drawable* object)
+void AiPaddle::setObject(Drawable *object)
 {
 	this->object = object;
 }
 
-void AiPaddle::calcSpeed(Drawable* object)
+void AiPaddle::calcSpeed(Drawable *object)
 {
 	computerClock.restart();
 

@@ -16,18 +16,18 @@ void Drawable::draw(bool originVisable)
 	{
 		sf::CircleShape originMarker(3);
 		originMarker.setFillColor(sf::Color::White);
-		originMarker.setPosition({ shape->getPosition().x, shape->getPosition().y });
-		originMarker.setOrigin({ 3, 3 });
+		originMarker.setPosition({shape->getPosition().x, shape->getPosition().y});
+		originMarker.setOrigin({3, 3});
 		RenderWindowManager::Draw(originMarker);
 	}
 }
 
 // Move Function
-void Drawable::move(const sf::Vector2f& offset)
+void Drawable::move(const sf::Vector2f &offset)
 {
 	shape->move(offset);
 }
-void Drawable::setPosition(const sf::Vector2f& position)
+void Drawable::setPosition(const sf::Vector2f &position)
 {
 	shape->setPosition(position);
 }
@@ -47,11 +47,11 @@ float Drawable::getCenterY() const
 }
 
 // Colour Functions
-void Drawable::setColour(const sf::Color& colour)
+void Drawable::setColour(const sf::Color &colour)
 {
 	shape->setFillColor(colour);
 }
-void Drawable::setOutline(float thickness, const sf::Color& outlineColour)
+void Drawable::setOutline(float thickness, const sf::Color &outlineColour)
 {
 	shape->setOutlineThickness(thickness);
 	shape->setOutlineColor(outlineColour);

@@ -18,11 +18,11 @@
 #include <vector>
 
 /*
-* @class GameOverState
-* @brief Game Over State of the Game - Signifies the game has ended
-*
-* Game Over State allows user to return to Play Again, Return to Main Menu, or Exit Application
-*/
+ * @class GameOverState
+ * @brief Game Over State of the Game - Signifies the game has ended
+ *
+ * Game Over State allows user to return to Play Again, Return to Main Menu, or Exit Application
+ */
 class GameOverState : public State
 {
 public:
@@ -57,7 +57,7 @@ private:
 
 	// Text
 	sf::Font font;
-	sf::Text scoreText = sf::Text(font, "", 50); // Initialise with Empty String - Will be set to Winner
+	sf::Text scoreText = sf::Text(font, "", 50);  // Initialise with Empty String - Will be set to Winner
 	sf::Text winnerText = sf::Text(font, "", 30); // Initialise with Empty String - Will be set to Score
 
 	// Buttons

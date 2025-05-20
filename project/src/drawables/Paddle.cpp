@@ -9,12 +9,12 @@ Paddle::Paddle(PaddleSide side)
 	// Outline Setup
 	rect.setOutlineThickness(4);
 	rect.setOutlineColor(sf::Color::Black);
-	rect.setOrigin({ (paddleSize.x / 2), (paddleSize.y / 2) });
+	rect.setOrigin({(paddleSize.x / 2), (paddleSize.y / 2)});
 
 	if (side == PaddleSide::LEFT)
-		rect.setPosition({ 30.f, RenderWindowManager::GetHeight() / 2 });
+		rect.setPosition({30.f, RenderWindowManager::GetHeight() / 2});
 	else if (side == PaddleSide::RIGHT)
-		rect.setPosition({ RenderWindowManager::GetWidth() - 30.f, RenderWindowManager::GetHeight() / 2 });
+		rect.setPosition({RenderWindowManager::GetWidth() - 30.f, RenderWindowManager::GetHeight() / 2});
 	shape = &rect;
 }
 
@@ -35,28 +35,28 @@ float Paddle::getRight() const
 	return rect.getPosition().x + (paddleSize.x / 2);
 }
 
-bool Paddle::checkCollisions(const Drawable* object)
+bool Paddle::checkCollisions(const Drawable *object)
 {
-    if (side == PaddleSide::LEFT)
-    {
+	if (side == PaddleSide::LEFT)
+	{
 		return (object->getLeft() < getRight() && object->getLeft() > getCenterX() &&
-			object->getBottom() >= getTop() && object->getTop() <= getBottom());
-    }
+				object->getBottom() >= getTop() && object->getTop() <= getBottom());
+	}
 	else
-    {
+	{
 		return (object->getRight() > getLeft() && object->getRight() < getCenterX() &&
-			object->getBottom() >= getTop() && object->getTop() <= getBottom());
-    }
+				object->getBottom() >= getTop() && object->getTop() <= getBottom());
+	}
 }
 
 void Paddle::moveUp()
 {
 	if (getTop() > 10.f)
-		rect.move({ 0.f, -paddleSpeed * DeltaTimeClock::GetDeltaTime() });
+		rect.move({0.f, -paddleSpeed * DeltaTimeClock::GetDeltaTime()});
 }
 
 void Paddle::moveDown()
 {
 	if (getBottom() < RenderWindowManager::GetHeight() - 5.f)
-	rect.move({ 0.f, paddleSpeed * DeltaTimeClock::GetDeltaTime() });
+		rect.move({0.f, paddleSpeed * DeltaTimeClock::GetDeltaTime()});
 }

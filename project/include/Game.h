@@ -21,26 +21,32 @@
 #include <random>
 
 /**
-* @class Game
-* @brief Entry point to the Game
-* 
-* The Game class acts as the core of the game. It is responsible
-* for initialising all systems required for gameplay, including game state
-* management, input handling, and rendering
-*/
+ * @class Game
+ * @brief Entry point to the Pong game.
+ * 
+ * The Game class acts as the core controller for the application.
+ * It is responsible for initializing all core systems required for gameplay,
+ * including state management, input handling, rendering, and the main game loop.
+ */
 class Game
 {
 public:
-	Game();
-	~Game() = default;
+    Game();
+    ~Game() = default;
 
-	void run();
+    /**
+     * @brief Starts the main game loop.
+     * 
+     * Continuously updates and renders the current game state.
+     * Handles timing and transitions between different states.
+     */
+    void run();
 
 private:
 	// Member Functions
 	// Initialisation
-	void initialiseSounds();										// Loads Sounds from Files
-	void initialiseBackgroundMusic();								// Loads Sounds from Files
+	void initialiseSounds(); // Loads Sounds from Files
+	void initialiseBackgroundMusic(); // Loads Sounds from Files
 
 	// Member Variables
 

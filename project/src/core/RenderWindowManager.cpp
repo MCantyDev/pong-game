@@ -1,6 +1,6 @@
 #include "core/RenderWindowManager.h"
 
-sf::RenderWindow* RenderWindowManager::instance = nullptr;
+sf::RenderWindow *RenderWindowManager::instance = nullptr;
 
 RenderWindowManager::~RenderWindowManager()
 {
@@ -11,16 +11,25 @@ RenderWindowManager::~RenderWindowManager()
 	}
 }
 
-sf::RenderWindow* RenderWindowManager::GetWindow()
+sf::RenderWindow *RenderWindowManager::GetInstance()
 {
 	if (!instance)
 	{
-		instance = new sf::RenderWindow(sf::VideoMode({ 1200, 800 }), "Pong Game", { sf::Style::Titlebar | sf::Style::Close });
+		instance = new sf::RenderWindow(sf::VideoMode({1200, 800}), "Pong Game", {sf::Style::Titlebar | sf::Style::Close});
 	}
 	return instance;
 }
 
-void RenderWindowManager::Draw(const sf::Drawable& drawable, const sf::RenderStates& states)
+void RenderWindowManager::DeleteInstance()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
+void RenderWindowManager::Draw(const sf::Drawable &drawable, const sf::RenderStates &states)
 {
 	if (!instance)
 	{
@@ -29,10 +38,10 @@ void RenderWindowManager::Draw(const sf::Drawable& drawable, const sf::RenderSta
 	}
 	instance->draw(drawable, states);
 }
-void RenderWindowManager::Draw(const sf::Vertex* vertices,
-	std::size_t         vertexCount,
-	sf::PrimitiveType       type,
-	const sf::RenderStates& states)
+void RenderWindowManager::Draw(const sf::Vertex *vertices,
+							   std::size_t vertexCount,
+							   sf::PrimitiveType type,
+							   const sf::RenderStates &states)
 {
 	if (!instance)
 	{
@@ -41,7 +50,7 @@ void RenderWindowManager::Draw(const sf::Vertex* vertices,
 	}
 	instance->draw(vertices, vertexCount, type, states);
 }
-void RenderWindowManager::Draw(const sf::VertexBuffer& vertexBuffer, const sf::RenderStates& states)
+void RenderWindowManager::Draw(const sf::VertexBuffer &vertexBuffer, const sf::RenderStates &states)
 {
 	if (!instance)
 	{
@@ -50,10 +59,10 @@ void RenderWindowManager::Draw(const sf::VertexBuffer& vertexBuffer, const sf::R
 	}
 	instance->draw(vertexBuffer, states);
 }
-void RenderWindowManager::Draw(const sf::VertexBuffer& vertexBuffer,
-	std::size_t         firstVertex,
-	std::size_t         vertexCount,
-	const sf::RenderStates& states)
+void RenderWindowManager::Draw(const sf::VertexBuffer &vertexBuffer,
+							   std::size_t firstVertex,
+							   std::size_t vertexCount,
+							   const sf::RenderStates &states)
 {
 	if (!instance)
 	{

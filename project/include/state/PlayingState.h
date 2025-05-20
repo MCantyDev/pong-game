@@ -21,11 +21,11 @@
 #include <memory>
 
 /*
-* @class PlayingState
-* @brief Playing State of the Game - Signifies the User is playing the Game
-* 
-* Playing State allows Users to return to the MenuState or proceed to GameOverState if a score reaches 5
-*/
+ * @class PlayingState
+ * @brief Playing State of the Game - Signifies the User is playing the Game
+ *
+ * Playing State allows Users to return to the MenuState or proceed to GameOverState if a score reaches 5
+ */
 class PlayingState : public State
 {
 public:
@@ -51,18 +51,18 @@ private:
 	// Chosen Game Mode
 	GameMode mode;
 
-	// Score Manager 
-	ScoreManager* scoreManager = nullptr;
+	// Score Manager
+	ScoreManager *scoreManager = nullptr;
 
 	// Paddle Values
-	Paddle* playerOne = nullptr;
-	Paddle* playerTwo = nullptr;
+	Paddle *playerOne = nullptr;
+	Paddle *playerTwo = nullptr;
 
 	// AI Paddle Values
-	AiPaddle* aiPaddle = nullptr;
+	AiPaddle *aiPaddle = nullptr;
 
 	// Ball Values
-	Ball* ball = nullptr;
+	Ball *ball = nullptr;
 
 	// Text Scores
 	sf::Font font;

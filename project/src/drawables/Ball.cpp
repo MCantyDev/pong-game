@@ -2,16 +2,16 @@
 
 #include "drawables/Paddle.h"
 
-Ball::Ball(Paddle* p1, Paddle* p2)
+Ball::Ball(Paddle *p1, Paddle *p2)
 	: playerOne(p1), playerTwo(p2),
-	rando(), rng(rando()), scoreManager(ScoreManager::GetInstance())
+	  rando(), rng(rando()), scoreManager(ScoreManager::GetInstance())
 {
 	circle.setRadius(ballRadius - 4);
 	circle.setFillColor(sf::Color::White);
 	circle.setOutlineThickness(4);
 	circle.setOutlineColor(sf::Color::Black);
-	circle.setOrigin({ ballRadius / 2, ballRadius / 2 });
-	circle.setPosition({ RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 });
+	circle.setOrigin({ballRadius / 2, ballRadius / 2});
+	circle.setPosition({RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2});
 	shape = &circle;
 
 	// Add an Observer
@@ -38,7 +38,8 @@ void Ball::update()
 			moveBall = true;
 			delayClock.stop();
 		}
-		else return;
+		else
+			return;
 	}
 	// Check Collisions
 	paddleCollisionCheck();
@@ -46,15 +47,14 @@ void Ball::update()
 	scoreCollisionCheck();
 
 	// Move Ball
-	circle.move({ ballSpeed * DeltaTimeClock::GetDeltaTime(), ballAngle });
-
+	circle.move({ballSpeed * DeltaTimeClock::GetDeltaTime(), ballAngle});
 }
 
 void Ball::paddleCollisionCheck()
 {
 	if (playerOne->checkCollisions(this))
 	{
-		SoundManager::GetSound("paddle_bounce")->play();
+		SoundManager::Play("paddle_bounce", Sound::EFFECT);
 		std::uniform_real_distribution<float> dist(0, 20);
 		ballAngle = sf::degrees(180) - ballAngle;
 
@@ -64,12 +64,12 @@ void Ball::paddleCollisionCheck()
 			ballAngle -= sf::degrees(dist(rng));
 
 		ballAngle = sf::degrees(fmod(ballAngle.asDegrees() + 180.f, 360.f) - 180.f);
-		circle.setPosition({ circle.getPosition().x + ballRadius + 0.1f, circle.getPosition().y });
+		circle.setPosition({circle.getPosition().x + ballRadius + 0.1f, circle.getPosition().y});
 	}
 
 	if (playerTwo->checkCollisions(this))
 	{
-		SoundManager::GetSound("paddle_bounce")->play();
+		SoundManager::Play("paddle_bounce", Sound::EFFECT);
 		std::uniform_real_distribution<float> dist(0, 20);
 		ballAngle = sf::degrees(180) - ballAngle;
 
@@ -79,39 +79,39 @@ void Ball::paddleCollisionCheck()
 			ballAngle -= sf::degrees(dist(rng));
 
 		ballAngle = sf::degrees(fmod(ballAngle.asDegrees() + 180.f, 360.f) - 180.f);
-		circle.setPosition({ circle.getPosition().x - ballRadius - 0.1f, circle.getPosition().y });
+		circle.setPosition({circle.getPosition().x - ballRadius - 0.1f, circle.getPosition().y});
 	}
 }
 void Ball::wallCollisionCheck()
 {
 	if (circle.getPosition().y - ballRadius < 0)
 	{
-		SoundManager::GetSound("wall_bounce")->play();
+		SoundManager::Play("wall_bounce", Sound::EFFECT);
 		ballAngle = -ballAngle;
 		ballAngle = sf::degrees(fmod(ballAngle.asDegrees() + 180.f, 360.f) - 180.f);
-		circle.setPosition({ circle.getPosition().x, circle.getPosition().y + ballRadius + 0.1f });
+		circle.setPosition({circle.getPosition().x, circle.getPosition().y + ballRadius + 0.1f});
 	}
 
 	if (circle.getPosition().y + ballRadius > RenderWindowManager::GetHeight())
 	{
-		SoundManager::GetSound("wall_bounce")->play();
+		SoundManager::Play("wall_bounce", Sound::EFFECT);
 		ballAngle = -ballAngle;
 		ballAngle = sf::degrees(fmod(ballAngle.asDegrees() + 180.f, 360.f) - 180.f);
-		circle.setPosition({ circle.getPosition().x, circle.getPosition().y - ballRadius - 0.1f });
+		circle.setPosition({circle.getPosition().x, circle.getPosition().y - ballRadius - 0.1f});
 	}
 }
 void Ball::scoreCollisionCheck()
 {
 	if (circle.getPosition().x - ballRadius < 0.f)
 	{
-		SoundManager::GetSound("score_point")->play();
+		SoundManager::Play("score_point", Sound::EFFECT);
 		notifyObservers(PaddleSide::RIGHT);
 
 		delayClock.restart();
 		moveBall = false;
 
 		// Reset Position
-		circle.setPosition({ RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 });
+		circle.setPosition({RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2});
 
 		// Random Angle
 		std::uniform_real_distribution<float> dist(135, 225);
@@ -120,14 +120,14 @@ void Ball::scoreCollisionCheck()
 
 	if (circle.getPosition().x + ballRadius > RenderWindowManager::GetWidth())
 	{
-		SoundManager::GetSound("score_point")->play();
+		SoundManager::Play("score_point", Sound::EFFECT);
 		notifyObservers(PaddleSide::LEFT);
 
 		delayClock.restart();
 		moveBall = false;
 
 		// Reset Position
-		circle.setPosition({ RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2 });
+		circle.setPosition({RenderWindowManager::GetWidth() / 2, RenderWindowManager::GetHeight() / 2});
 
 		// Random Angle
 		std::uniform_real_distribution<float> dist(-45, 45);

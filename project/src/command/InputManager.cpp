@@ -1,11 +1,11 @@
 #include "command/InputManager.h"
 
-InputManager* InputManager::instance = nullptr;
-std::unordered_map<sf::Keyboard::Key, Command*> InputManager::keyBindings;
+InputManager *InputManager::instance = nullptr;
+std::unordered_map<sf::Keyboard::Key, Command *> InputManager::keyBindings;
 
 InputManager::~InputManager()
 {
-	for (auto& [key, command] : keyBindings)
+	for (auto &[key, command] : keyBindings)
 	{
 		delete command;
 		command = nullptr;
@@ -18,7 +18,7 @@ InputManager::~InputManager()
 	}
 }
 
-InputManager* InputManager::GetInstance()
+InputManager *InputManager::GetInstance()
 {
 	if (!instance)
 		instance = new InputManager();
@@ -26,11 +26,20 @@ InputManager* InputManager::GetInstance()
 	return instance;
 }
 
+void InputManager::DeleteInstance()
+{
+	if (instance)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
 void InputManager::HandleInput()
 {
-	if (RenderWindowManager::GetWindow()->hasFocus())
+	if (RenderWindowManager::GetInstance()->hasFocus())
 	{
-		for (const auto& [key, command] : keyBindings)
+		for (const auto &[key, command] : keyBindings)
 		{
 			if (sf::Keyboard::isKeyPressed(key) && command)
 				command->execute();
@@ -38,7 +47,7 @@ void InputManager::HandleInput()
 	}
 }
 
-void InputManager::SetBinding(sf::Keyboard::Key key, Command* command)
+void InputManager::SetBinding(sf::Keyboard::Key key, Command *command)
 {
 	keyBindings[key] = std::move(command);
 }
